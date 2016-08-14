@@ -80,7 +80,7 @@ Base path the config is read from
          resource.  
 **Throws**:
 
-- <code>module:transifex-config/lib/errors.NoMatchingResourceError</code> There
+- <code>[NoMatchingResourceError](#module_transifex-config/lib/errors.NoMatchingResourceError)</code> There
         is no matching resource.
 - The config could not be read.
 
@@ -125,6 +125,24 @@ named after the key with its value assigned.
 ## transifex-config/lib/errors
 **Author:** Martin Giger  
 **License**: MIT  
+
+* [transifex-config/lib/errors](#module_transifex-config/lib/errors)
+    * [.NoMatchingResourceError](#module_transifex-config/lib/errors.NoMatchingResourceError)
+        * [new NoMatchingResourceError(resource)](#new_module_transifex-config/lib/errors.NoMatchingResourceError_new)
+
+<a name="module_transifex-config/lib/errors.NoMatchingResourceError"></a>
+
+### transifex-config/lib/errors.NoMatchingResourceError
+**Kind**: static class of <code>[transifex-config/lib/errors](#module_transifex-config/lib/errors)</code>  
+**Implements:** <code>Error</code>  
+<a name="new_module_transifex-config/lib/errors.NoMatchingResourceError_new"></a>
+
+#### new NoMatchingResourceError(resource)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| resource | <code>string</code> | Path to the resource that has no matching config                            entry. |
+
 <a name="module_transifex-config/lib/load-config"></a>
 
 ## transifex-config/lib/load-config
