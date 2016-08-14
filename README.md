@@ -1,4 +1,6 @@
 # transifex-config
+[![Build Status](https://travis-ci.org/freaktechnik/transifex-config.svg?branch=master)](https://travis-ci.org/freaktechnik/transifex-config) [![codecov](https://codecov.io/gh/freaktechnik/transifex-config/branch/master/graph/badge.svg)](https://codecov.io/gh/freaktechnik/transifex-config) [![Dependency Status](https://dependencyci.com/github/freaktechnik/transifex-config/badge)](https://dependencyci.com/github/freaktechnik/transifex-config)
+
 Reads the transifex client config and offers utility methods on top of it.
 
 ## Installation
