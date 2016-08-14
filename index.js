@@ -1,5 +1,4 @@
 /**
- * @module transifex-config
  * @author Martin Giger
  * @license MIT
  */
@@ -17,8 +16,13 @@ var errors = require("./lib/errors");
  * @param {string} [basePath] - Path the transifex configuration is in. Defaults
  *                              to the best guess of the package root.
  * @throws If the .transifexrc or .tx/config can not be found in the base path.
+ * @exports transifex-config
  */
 function TransifexConfig(basePath) {
+    /**
+     * Base path the config is read from
+     * @type {string}
+     */
     this.basePath = basePath || require("app-root-path");
 
     var R_OK = fs.R_OK || fs.constants.R_OK;
@@ -95,8 +99,9 @@ TransifexConfig.prototype.getResources = function() {
  * @async
  * @returns {module:transifex-config~ConfigSection} Config section for the
  *          resource.
- * @throws {module:transifex-config/lib/errors.NoMatchingResourceError|Error} There
- *         is no matching resource or the config could not be read.
+ * @throws {module:transifex-config/lib/errors.NoMatchingResourceError} There
+ *         is no matching resource.
+ * @throws The config could not be read.
  */
 TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
     var self = this;

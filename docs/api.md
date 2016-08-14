@@ -12,36 +12,6 @@
 <a name="module_transifex-config"></a>
 
 ## transifex-config
-**Author:** Martin Giger  
-**License**: MIT  
-
-* [transifex-config](#module_transifex-config)
-    * [~TransifexConfig](#module_transifex-config..TransifexConfig)
-        * [new TransifexConfig([basePath])](#new_module_transifex-config..TransifexConfig_new)
-        * [.getConfig()](#module_transifex-config..TransifexConfig+getConfig) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-        * [.getRC()](#module_transifex-config..TransifexConfig+getRC) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-        * [.getResources()](#module_transifex-config..TransifexConfig+getResources) ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
-        * [.getResource(localPath, [matchSourceLang])](#module_transifex-config..TransifexConfig+getResource) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
-        * [.getMappedLang(lang, resource)](#module_transifex-config..TransifexConfig+getMappedLang) ⇒ <code>string</code>
-    * [~ConfigSection](#module_transifex-config..ConfigSection) : <code>Object.&lt;string, string&gt;</code>
-    * [~ParsedConfig](#module_transifex-config..ParsedConfig) : <code>Object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
-
-<a name="module_transifex-config..TransifexConfig"></a>
-
-### transifex-config~TransifexConfig
-**Kind**: inner class of <code>[transifex-config](#module_transifex-config)</code>  
-
-* [~TransifexConfig](#module_transifex-config..TransifexConfig)
-    * [new TransifexConfig([basePath])](#new_module_transifex-config..TransifexConfig_new)
-    * [.getConfig()](#module_transifex-config..TransifexConfig+getConfig) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-    * [.getRC()](#module_transifex-config..TransifexConfig+getRC) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-    * [.getResources()](#module_transifex-config..TransifexConfig+getResources) ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
-    * [.getResource(localPath, [matchSourceLang])](#module_transifex-config..TransifexConfig+getResource) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
-    * [.getMappedLang(lang, resource)](#module_transifex-config..TransifexConfig+getMappedLang) ⇒ <code>string</code>
-
-<a name="new_module_transifex-config..TransifexConfig_new"></a>
-
-#### new TransifexConfig([basePath])
 **Throws**:
 
 - If the .transifexrc or .tx/config can not be found in the base path.
@@ -51,10 +21,29 @@
 | --- | --- | --- |
 | [basePath] | <code>string</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
 
-<a name="module_transifex-config..TransifexConfig+getConfig"></a>
 
-#### transifexConfig.getConfig() ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-**Kind**: instance method of <code>[TransifexConfig](#module_transifex-config..TransifexConfig)</code>  
+* [transifex-config](#module_transifex-config)
+    * _instance_
+        * [.basePath](#module_transifex-config+basePath) : <code>string</code>
+        * [.getConfig()](#module_transifex-config+getConfig) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
+        * [.getRC()](#module_transifex-config+getRC) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
+        * [.getResources()](#module_transifex-config+getResources) ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
+        * [.getResource(localPath, [matchSourceLang])](#module_transifex-config+getResource) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
+        * [.getMappedLang(lang, resource)](#module_transifex-config+getMappedLang) ⇒ <code>string</code>
+    * _inner_
+        * [~ConfigSection](#module_transifex-config..ConfigSection) : <code>Object.&lt;string, string&gt;</code>
+        * [~ParsedConfig](#module_transifex-config..ParsedConfig) : <code>Object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
+
+<a name="module_transifex-config+basePath"></a>
+
+### transifex-config.basePath : <code>string</code>
+Base path the config is read from
+
+**Kind**: instance property of <code>[transifex-config](#module_transifex-config)</code>  
+<a name="module_transifex-config+getConfig"></a>
+
+### transifex-config.getConfig() ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
+**Kind**: instance method of <code>[transifex-config](#module_transifex-config)</code>  
 **Returns**: <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code> - Parsed .tx/config as an
          object. Will be cached.  
 **Throws**:
@@ -62,10 +51,10 @@
 - The config could not be read.
 
 **Async**:   
-<a name="module_transifex-config..TransifexConfig+getRC"></a>
+<a name="module_transifex-config+getRC"></a>
 
-#### transifexConfig.getRC() ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
-**Kind**: instance method of <code>[TransifexConfig](#module_transifex-config..TransifexConfig)</code>  
+### transifex-config.getRC() ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
+**Kind**: instance method of <code>[transifex-config](#module_transifex-config)</code>  
 **Returns**: <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code> - Parsed .transifexrc as an
          object. Will be cached.  
 **Throws**:
@@ -73,26 +62,27 @@
 - The .transifexrc could not be read.
 
 **Async**:   
-<a name="module_transifex-config..TransifexConfig+getResources"></a>
+<a name="module_transifex-config+getResources"></a>
 
-#### transifexConfig.getResources() ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
-**Kind**: instance method of <code>[TransifexConfig](#module_transifex-config..TransifexConfig)</code>  
+### transifex-config.getResources() ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
+**Kind**: instance method of <code>[transifex-config](#module_transifex-config)</code>  
 **Returns**: <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code> - Array of resources.  
 **Throws**:
 
 - The config could not be read.
 
 **Async**:   
-<a name="module_transifex-config..TransifexConfig+getResource"></a>
+<a name="module_transifex-config+getResource"></a>
 
-#### transifexConfig.getResource(localPath, [matchSourceLang]) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
-**Kind**: instance method of <code>[TransifexConfig](#module_transifex-config..TransifexConfig)</code>  
+### transifex-config.getResource(localPath, [matchSourceLang]) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
+**Kind**: instance method of <code>[transifex-config](#module_transifex-config)</code>  
 **Returns**: <code>[ConfigSection](#module_transifex-config..ConfigSection)</code> - Config section for the
          resource.  
 **Throws**:
 
-- <code>module:transifex-config/lib/errors.NoMatchingResourceError</code><code>Error</code> There
-        is no matching resource or the config could not be read.
+- <code>module:transifex-config/lib/errors.NoMatchingResourceError</code> There
+        is no matching resource.
+- The config could not be read.
 
 **Async**:   
 
@@ -101,10 +91,10 @@
 | localPath | <code>string</code> | Local path of the resource to return the config                             entry of. |
 | [matchSourceLang] | <code>boolean</code> | If the resource should be returned                                            when the path is for the source                                            language of the resource. |
 
-<a name="module_transifex-config..TransifexConfig+getMappedLang"></a>
+<a name="module_transifex-config+getMappedLang"></a>
 
-#### transifexConfig.getMappedLang(lang, resource) ⇒ <code>string</code>
-**Kind**: instance method of <code>[TransifexConfig](#module_transifex-config..TransifexConfig)</code>  
+### transifex-config.getMappedLang(lang, resource) ⇒ <code>string</code>
+**Kind**: instance method of <code>[transifex-config](#module_transifex-config)</code>  
 **Returns**: <code>string</code> - Mapped language code.  
 **Throws**:
 
@@ -156,12 +146,14 @@ named after the key with its value assigned.
 File name of the config file from the base path.
 
 **Kind**: static constant of <code>[transifex-config/lib/load-config](#module_transifex-config/lib/load-config)</code>  
+**Read only**: true  
 <a name="module_transifex-config/lib/load-config.TRANSIFEXRC"></a>
 
 ### transifex-config/lib/load-config.TRANSIFEXRC : <code>string</code>
 File name of the rc file from the base path.
 
 **Kind**: static constant of <code>[transifex-config/lib/load-config](#module_transifex-config/lib/load-config)</code>  
+**Read only**: true  
 <a name="module_transifex-config/lib/load-config.txconfig"></a>
 
 ### transifex-config/lib/load-config.txconfig(basePath) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
