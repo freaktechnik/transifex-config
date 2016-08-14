@@ -7,6 +7,9 @@
 <dd></dd>
 <dt><a href="#module_transifex-config/lib/load-config">transifex-config/lib/load-config</a></dt>
 <dd></dd>
+<dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>Object.&lt;string, string&gt;</code></dt>
+<dd><p>Parses the language map.</p>
+</dd>
 </dl>
 
 <a name="module_transifex-config"></a>
@@ -222,4 +225,17 @@ Loads a file from the given path and returns its contents.
 | Param | Type | Description |
 | --- | --- | --- |
 | path | <code>string</code> | Path to the file to load. |
+
+<a name="module_transifex-config/lib/parse-langmap"></a>
+
+## transifex-config/lib/parse-langmap ⇒ <code>Object.&lt;string, string&gt;</code>
+Parses the language map.
+
+**Returns**: <code>Object.&lt;string, string&gt;</code> - A map of the language, with the local
+         language code as key and the remote language code as value.  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [langMapString] | <code>string</code> | <code>&quot;\&quot;\&quot;&quot;</code> | Language map specification. |
+| [langMap] | <code>Object</code> | <code>{}</code> | Language map to inherit from. |
 
