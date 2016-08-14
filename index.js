@@ -15,7 +15,7 @@ var errors = require("./lib/errors");
  * @class
  * @param {string} [basePath] - Path the transifex configuration is in. Defaults
  *                              to the best guess of the package root.
- * @throws If the .transifexrc or .tx/config can not be found in the base path.
+ * @throws The .transifexrc or .tx/config can not be found in the base path.
  * @exports transifex-config
  */
 function TransifexConfig(basePath) {

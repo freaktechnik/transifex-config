@@ -20,7 +20,7 @@
 ## transifex-config
 **Throws**:
 
-- If the .transifexrc or .tx/config can not be found in the base path.
+- The .transifexrc or .tx/config can not be found in the base path.
 
 
 | Param | Type | Description |
@@ -239,7 +239,7 @@ Parses the language map.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [langMapString] | <code>string</code> | <code>&quot;\&quot;\&quot;&quot;</code> | Language map specification. |
+| [langMapString] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | Language map specification. |
 | [langMap] | <code>Object</code> | <code>{}</code> | Language map to inherit from. |
 
 <a name="module_transifex-config/lib/parse-rc"></a>
