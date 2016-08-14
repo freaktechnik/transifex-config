@@ -91,8 +91,8 @@ TransifexConfig.prototype.getResources = function() {
 };
 
 /**
- * @param {string} localPath - Local path of the resource to return the config
- *                             entry of.
+ * @param {string} localPath - Absolute local path of the resource to return the
+ *                             config entry of.
  * @param {boolean} [matchSourceLang] - If the resource should be returned
  *                                            when the path is for the source
  *                                            language of the resource.

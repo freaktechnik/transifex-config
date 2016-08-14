@@ -94,7 +94,7 @@ Base path the config is read from
 
 | Param | Type | Description |
 | --- | --- | --- |
-| localPath | <code>string</code> | Local path of the resource to return the config                             entry of. |
+| localPath | <code>string</code> | Absolute local path of the resource to return the                             config entry of. |
 | [matchSourceLang] | <code>boolean</code> | If the resource should be returned                                            when the path is for the source                                            language of the resource. |
 
 <a name="module_transifex-config+getMappedLang"></a>
