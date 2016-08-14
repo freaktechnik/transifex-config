@@ -1,0 +1,36 @@
+{
+  "name": "transifex-config",
+  "version": "1.0.0",
+  "description": "Reads the transifex client config and offers utility methods on top of it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint index.js lib/ && nyc ava",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "docs": "jsdoc2md index.js lib/*.js > docs/api.md"
+  },
+  "keywords": [
+    "transifex",
+    "tx"
+  ],
+  "author": "Martin Giger (https://humanoids.be)",
+  "license": "MIT",
+  "dependencies": {
+    "app-root-path": "^1.3.0",
+    "mz": "^2.4.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "eslint": "^3.3.0",
+    "eslint-plugin-freaktechnik": "^1.2.1",
+    "nyc": "^8.1.0",
+    "random-string": "^0.1.2"
+  },
+  "bugs": {
+    "url": "https://github.com/freaktechnik/transifex-config/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freaktechnik/transifex-config.git"
+  }
+}

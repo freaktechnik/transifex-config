@@ -1,0 +1,15 @@
+{
+    "env": {
+        "es6": false
+    },
+    "parserOptions": {
+        "ecmaVersion": 5
+    },
+    "rules": {
+        "one-var": 0,
+        "no-var": 0,
+        "prefer-arrow-callback": 0,
+        "require-jsdoc": 1
+    },
+    "extends": "plugin:freaktechnik/node"
+}
