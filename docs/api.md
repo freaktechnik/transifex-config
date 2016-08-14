@@ -10,6 +10,9 @@
 <dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>Object.&lt;string, string&gt;</code></dt>
 <dd><p>Parses the language map.</p>
 </dd>
+<dt><a href="#module_transifex-config/lib/parse-rc">transifex-config/lib/parse-rc</a> ⇒ <code><a href="#module_transifex-config..ParsedConfig">ParsedConfig</a></code></dt>
+<dd><p>Parse a transifex client configuration file. Looks at the file line by line.</p>
+</dd>
 </dl>
 
 <a name="module_transifex-config"></a>
@@ -238,4 +241,16 @@ Parses the language map.
 | --- | --- | --- | --- |
 | [langMapString] | <code>string</code> | <code>&quot;\&quot;\&quot;&quot;</code> | Language map specification. |
 | [langMap] | <code>Object</code> | <code>{}</code> | Language map to inherit from. |
+
+<a name="module_transifex-config/lib/parse-rc"></a>
+
+## transifex-config/lib/parse-rc ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
+Parse a transifex client configuration file. Looks at the file line by line.
+
+**Returns**: <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code> - Configuration file
+         represented as an object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>string</code> | Configuration file contents. |
 
