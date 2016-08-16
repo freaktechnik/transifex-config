@@ -12,6 +12,17 @@ test("Doesn't match unrelated file", (t) => {
     t.false(matchResource(basePath, "/foo/en1.foo", resource));
 });
 
+test("Doesn't match path that includes the full path", (t) => {
+    const basePath = "/foo/";
+    const resource = {
+        file_filter: "<lang>.file",
+        source_lang: "en"
+    };
+
+    t.false(matchResource(basePath, "/bar/foo/en.file", resource));
+    t.false(matchResource(basePath, "/foo/en.file/bar", resource));
+});
+
 test("Get resource from file_filter", (t) => {
     const basePath = "/foo/";
     const localPath = basePath + "de/de.file";
