@@ -10,6 +10,7 @@ var fs = require("fs");
 var load = require("./lib/load-config");
 var parseLangMap = require("./lib/parse-langmap");
 var errors = require("./lib/errors");
+var matchResource = require("./lib/match-resource");
 
 /**
  * @class
@@ -107,48 +108,40 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
     var self = this;
     return this.getResources().then(function(resources) {
         var lang,
-            resource = _.find(resources, function(r) {
-                // If the source language should be fetched, check if it matches the source file
-                if(matchSourceLang && "source_file" in r && localPath == path.join(self.basePath, r.source_file)) {
-                    lang = r.source_lang;
+            resource = _.find(resources, function(resource) {
+                var result = matchResource(self.basePath, localPath, resource);
+                if(result) {
+                    lang = result;
                     return true;
-                }
-                else {
-                    // See if the file matches the file_filter
-                    var rmatch = localPath.match(new RegExp(path.join(self.basePath, r.file_filter.replace(/<lang>/g, "([a-zA-Z-]+)"))));
-                    if(rmatch && rmatch.length) {
-                        if(rmatch.length > 2) {
-                            var firstLang = rmatch[1];
-                            for(var i = 2; i < rmatch.length; ++i) {
-                                if(rmatch[i] != firstLang) {
-                                    return false;
-                                }
-                            }
-                        }
-                        lang = rmatch[1];
-                        return true;
-                    }
-                    else {
-                        // Check if the file matches any of the files given by trans. keys
-                        var explicitPaths = _.filter(_.keys(r), function(key) {
-                            return key.search(/trans\.[a-zA-Z-]+/) != -1;
-                        });
-                        for(var k in explicitPaths) {
-                            if(localPath == path.join(self.basePath, r[explicitPaths[k]])) {
-                                lang = explicitPaths[k].substr("trans.".length);
-                                return true;
-                            }
-                        }
-                    }
                 }
                 return false;
             });
-        if(!resource || (!matchSourceLang && resource.source_lang == lang)) {
+        if(!resource) {
             throw new errors.NoMatchingResourceError(localPath);
+        }
+        else if(!matchSourceLang && resource.source_lang == lang) {
+            throw new errors.MatchesSourceError(localPath);
         }
         resource.lang = lang;
         resource.source = lang == resource.source_lang;
         return resource;
+    });
+};
+
+/**
+ * Check if a resource is the source resource.
+ *
+ * @param {string} path
+ * @async
+ * @returns {boolean}
+ * @throws The config could not be read.
+ */
+TransifexConfig.prototype.isSourceResource = function(path) {
+    var self = this;
+    return this.getResources().then(function(resources) {
+        return _.some(resources, function(resource) {
+            return matchResource(self.basePath, path, resource) == resource.source_lang;
+        });
     });
 };
 
