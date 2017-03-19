@@ -66,6 +66,27 @@ hostname = https://example.com`;
     await deleteMockEnv(basePath);
 });
 
+test("Normalize config hostname", async (t) => {
+    const rc = `[https://sub.example.com]
+username = foo
+password = bar
+hostname = https://example.com`;
+    const expectedRC = {
+        "https://sub.example.com": {
+            "username": "foo",
+            "password": "bar",
+            "hostname": "https://example.com"
+        }
+    };
+    const basePath = await mockEnv("", rc);
+
+    const parsedRC = await t.notThrows(load.transifexrc(basePath));
+
+    t.deepEqual(parsedRC, expectedRC);
+
+    await deleteMockEnv(basePath);
+});
+
 test("read tx config", async (t) => {
     const config = `[main]
 host = https://example.com
