@@ -38,8 +38,8 @@ test("parseLanguageMap no string, only object", (t) => {
         "en-US": "en_US"
     };
     const languageMap = "";
-    
+
     const parsedMap = parseLanguageMap(languageMap, existingMap);
-    
+
     t.deepEqual(parsedMap, existingMap);
 });

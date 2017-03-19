@@ -55,16 +55,16 @@ TransifexConfig.prototype.getConfig = function() {
 
 /**
  * @async
+ * @param {string} [project] - The config should contain this project URL.
  * @returns {module:transifex-config~ParsedConfig} Parsed .transifexrc as an
  *          object. Will be cached.
  * @throws The .transifexrc could not be read.
+ * @this TransifexConfig
  */
-TransifexConfig.prototype.getRC = function() {
-    if(!this._transifexrc) {
-        this._transifexrc = load.transifexrc(this.basePath);
-    }
-    return this._transifexrc;
-};
+function _getRC(project) {
+    return load.transifexrc(this.basePath, project);
+}
+TransifexConfig.prototype.getRC = _.memoize(_getRC);
 
 /**
  * @async
@@ -74,17 +74,19 @@ TransifexConfig.prototype.getRC = function() {
 TransifexConfig.prototype.getResources = function() {
     return this.getConfig().then(function(config) {
         var resources = [],
-            resourceId,
-            resource;
-        for(var c in config) {
-            if(c != "main") {
-                resourceId = c.split(".");
-                resource = {
-                    project: resourceId[0],
-                    name: resourceId[1]
-                };
-                _.extend(resource, config[c]);
-                resources.push(resource);
+            resource,
+            project;
+        for(var p in config) {
+            if(p != "main") {
+                project = config[p];
+                for(var c in project) {
+                    resource = {
+                        project: p,
+                        name: c
+                    };
+                    _.extend(resource, project[c]);
+                    resources.push(resource);
+                }
             }
         }
         return resources;
@@ -131,9 +133,9 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
 /**
  * Check if a resource is the source resource.
  *
- * @param {string} path
+ * @param {string} path - Path to check.
  * @async
- * @returns {boolean}
+ * @returns {boolean} If the resource is the source.
  * @throws The config could not be read.
  */
 TransifexConfig.prototype.isSourceResource = function(path) {

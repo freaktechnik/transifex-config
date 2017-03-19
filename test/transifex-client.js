@@ -69,14 +69,16 @@ source_lang=de`;
         "main": {
             "host": "https://example.com"
         },
-        "my_project.main_resource": {
-            "source_lang": "en",
-            "source_file": "foo.bar",
-            "file_filter": "<lang>.bar"
-        },
-        "my_project.second_res": {
-            "file_filter": "<lang>.foo",
-            "source_lang": "de"
+        "my_project": {
+            "main_resource": {
+                "source_lang": "en",
+                "source_file": "foo.bar",
+                "file_filter": "<lang>.bar"
+            },
+            "second_res": {
+                "file_filter": "<lang>.foo",
+                "source_lang": "de"
+            }
         }
     };
     const basePath = await mockEnv(config);
@@ -145,8 +147,8 @@ host=https://example.com`);
     t.is(await txc.getMappedLang("en", {
         project: "main",
         name: "resource",
-        file_filter: "locales/<lang>.file",
-        source_lang: "en"
+        "file_filter": "locales/<lang>.file",
+        "source_lang": "en"
     }), "en");
 
     await deleteMockEnv(basePath);
@@ -160,9 +162,9 @@ host=https://example.com`);
     t.is(await txc.getMappedLang("en", {
         project: "main",
         name: "resource",
-        lang_map: "fr:fr-FR",
-        file_filter: "locales/<lang>.file",
-        source_lang: "en"
+        "lang_map": "fr:fr-FR",
+        "file_filter": "locales/<lang>.file",
+        "source_lang": "en"
     }), "en");
 
     await deleteMockEnv(basePath);
@@ -176,9 +178,9 @@ host=https://example.com`);
     t.is(await txc.getMappedLang("en-US", {
         project: "main",
         name: "resource",
-        lang_map: "en_US:en-US",
-        file_filter: "locales/<lang>.file",
-        source_lang: "en"
+        "lang_map": "en_US:en-US",
+        "file_filter": "locales/<lang>.file",
+        "source_lang": "en"
     }), "en_US");
 
     await deleteMockEnv(basePath);
@@ -193,9 +195,9 @@ lang_map=en_US:en-US`);
     t.is(await txc.getMappedLang("en-US", {
         project: "main",
         name: "resource",
-        lang_map: "fr:fr-FR",
-        source_lang: "en",
-        file_filter: "locales/<lang>.file"
+        "lang_map": "fr:fr-FR",
+        "source_lang": "en",
+        "file_filter": "locales/<lang>.file"
     }), "en_US");
 
     await deleteMockEnv(basePath);
@@ -210,9 +212,9 @@ lang_map=en_US:en-US`);
     t.is(await txc.getMappedLang("en-US", {
         project: "main",
         name: "resource",
-        lang_map: "en:en-US",
-        source_lang: "en",
-        file_filter: "locales/<lang>.file"
+        "lang_map": "en:en-US",
+        "source_lang": "en",
+        "file_filter": "locales/<lang>.file"
     }), "en");
 
     await deleteMockEnv(basePath);
@@ -393,22 +395,6 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     t.true(await txc.isSourceResource(path.join(basePath, "locales/en/main.properties")));
-
-    await deleteMockEnv(basePath);
-});
-
-test("isSourceResource match source language resource", async (t) => {
-    const config = `[main]
-host = https://example.com
-
-[project.resource]
-source_file=locales/source/main.properties
-file_filter=locales/<lang>/main.properties
-source_lang=en`;
-    const basePath = await mockEnv(config);
-    const txc = new TransifexConfig(basePath);
-
-    t.true(await txc.isSourceResource(path.join(basePath, "locales/source/main.properties")));
 
     await deleteMockEnv(basePath);
 });
