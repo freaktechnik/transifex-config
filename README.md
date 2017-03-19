@@ -21,7 +21,7 @@ var txc = new TransifexConifg();
 ```
 
 ## API Documentation
-See [API Docs](/docs/api.md).
+See [API Docs](https://freaktechnik.github.io/transifex-config/api).
 
 ## Caveats
 Most of the implementation in this module assumes the documentation from
