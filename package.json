@@ -25,6 +25,7 @@
     "codecov": "^2.0.1",
     "eslint": "^3.3.0",
     "eslint-plugin-freaktechnik": "^2.0.0",
+    "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^10.0.0",
     "random-string": "^0.1.2"
   },

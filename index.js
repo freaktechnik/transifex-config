@@ -64,6 +64,11 @@ TransifexConfig.prototype.getConfig = function() {
 function _getRC(service) {
     return load.transifexrc(this.basePath, service);
 }
+/**
+ * Memoized version of {@link module:transifex-config~_getRC}.
+ *
+ * @augment module:transifex-config~_getRC
+ */
 TransifexConfig.prototype.getRC = _.memoize(_getRC);
 
 /**
