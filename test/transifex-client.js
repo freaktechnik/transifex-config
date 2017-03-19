@@ -38,10 +38,6 @@ hostname = https://example.com`;
 
     t.deepEqual(parsedRC, expectedRC);
 
-    t.is(txc.getRC(), txc._transifexrc);
-    const cachedRC = await txc.getRC();
-    t.deepEqual(cachedRC, expectedRC);
-
     await deleteMockEnv(basePath);
 });
 
@@ -50,7 +46,9 @@ test("Reading fails when there is no transifexrc", async (t) => {
     const txc = new TransifexConfig(basePath);
     await deleteMockEnv(basePath);
 
-    return t.throws(txc.getRC());
+    txc.getRC.cache = {};
+
+    return t.throws(txc.getRC(), Error);
 });
 
 test("read tx config", async (t) => {
