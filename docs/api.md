@@ -220,7 +220,7 @@ named after the key with its value assigned.
         * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
     * _inner_
         * [~loadConfig(path)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
-        * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ <code>Object</code>
+        * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
 
 <a name="module_transifex-config/lib/load-config.TXCONFIG"></a>
 
@@ -290,12 +290,12 @@ Loads a file from the given path and returns its contents.
 
 <a name="module_transifex-config/lib/load-config..normalizeRC"></a>
 
-### transifex-config/lib/load-config~normalizeRC(rc) ⇒ <code>Object</code>
+### transifex-config/lib/load-config~normalizeRC(rc) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
 Fixes the header names of the RC by re-assembling the host names instead of
 each domain part being a subsection.
 
 **Kind**: inner method of <code>[transifex-config/lib/load-config](#module_transifex-config/lib/load-config)</code>  
-**Returns**: <code>Object</code> - Normalized RC.  
+**Returns**: <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code> - Normalized RC.  
 
 | Param | Type | Description |
 | --- | --- | --- |
