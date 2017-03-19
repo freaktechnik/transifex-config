@@ -55,14 +55,14 @@ TransifexConfig.prototype.getConfig = function() {
 
 /**
  * @async
- * @param {string} [project] - The config should contain this project URL.
+ * @param {string} [service] - The config should contain this service URL.
  * @returns {module:transifex-config~ParsedConfig} Parsed .transifexrc as an
  *          object. Will be cached.
  * @throws The .transifexrc could not be read.
  * @this TransifexConfig
  */
 function _getRC(project) {
-    return load.transifexrc(this.basePath, project);
+    return load.transifexrc(this.basePath, service);
 }
 TransifexConfig.prototype.getRC = _.memoize(_getRC);
 
