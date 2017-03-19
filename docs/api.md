@@ -41,7 +41,7 @@
 * [transifex-config](#module_transifex-config)
     * _instance_
         * [.basePath](#module_transifex-config+basePath) : <code>string</code>
-        * [.getRC](#module_transifex-config+getRC)
+        * [.getRC](#module_transifex-config+getRC) ⇐ <code>[_getRC](#module_transifex-config.._getRC)</code>
         * [.getConfig()](#module_transifex-config+getConfig) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
         * [.getResources()](#module_transifex-config+getResources) ⇒ <code>[Array.&lt;ConfigSection&gt;](#module_transifex-config..ConfigSection)</code>
         * [.getResource(localPath, [matchSourceLang])](#module_transifex-config+getResource) ⇒ <code>[ConfigSection](#module_transifex-config..ConfigSection)</code>
@@ -60,11 +60,11 @@ Base path the config is read from
 **Kind**: instance property of <code>[transifex-config](#module_transifex-config)</code>  
 <a name="module_transifex-config+getRC"></a>
 
-### transifex-config.getRC
+### transifex-config.getRC ⇐ <code>[_getRC](#module_transifex-config.._getRC)</code>
 Memoized version of [_getRC](#module_transifex-config.._getRC).
 
 **Kind**: instance property of <code>[transifex-config](#module_transifex-config)</code>  
-**Augment**: module:transifex-config~_getRC  
+**Extends**: <code>[_getRC](#module_transifex-config.._getRC)</code>  
 <a name="module_transifex-config+getConfig"></a>
 
 ### transifex-config.getConfig() ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
@@ -220,6 +220,7 @@ named after the key with its value assigned.
         * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ <code>[ParsedConfig](#module_transifex-config..ParsedConfig)</code>
     * _inner_
         * [~loadConfig(path)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
+        * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ <code>Object</code>
 
 <a name="module_transifex-config/lib/load-config.TXCONFIG"></a>
 
@@ -286,6 +287,19 @@ Loads a file from the given path and returns its contents.
 | Param | Type | Description |
 | --- | --- | --- |
 | path | <code>string</code> | Path to the file to load. |
+
+<a name="module_transifex-config/lib/load-config..normalizeRC"></a>
+
+### transifex-config/lib/load-config~normalizeRC(rc) ⇒ <code>Object</code>
+Fixes the header names of the RC by re-assembling the host names instead of
+each domain part being a subsection.
+
+**Kind**: inner method of <code>[transifex-config/lib/load-config](#module_transifex-config/lib/load-config)</code>  
+**Returns**: <code>Object</code> - Normalized RC.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| rc | <code>Object</code> | RC to normalize. |
 
 <a name="module_transifex-config/lib/match-resource"></a>
 

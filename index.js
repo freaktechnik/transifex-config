@@ -67,7 +67,7 @@ function _getRC(service) {
 /**
  * Memoized version of {@link module:transifex-config~_getRC}.
  *
- * @augment module:transifex-config~_getRC
+ * @augments module:transifex-config~_getRC
  */
 TransifexConfig.prototype.getRC = _.memoize(_getRC);
 
