@@ -61,7 +61,7 @@ TransifexConfig.prototype.getConfig = function() {
  * @throws The .transifexrc could not be read.
  * @this TransifexConfig
  */
-function _getRC(project) {
+function _getRC(service) {
     return load.transifexrc(this.basePath, service);
 }
 TransifexConfig.prototype.getRC = _.memoize(_getRC);
