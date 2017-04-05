@@ -24,7 +24,7 @@ hostname = https://example.com`;
     };
     const basePath = await mockEnv("", rc);
 
-    const parsedRC = await t.notThrows(load.transifexrc(basePath));
+    const parsedRC = await load.transifexrc(basePath);
 
     t.deepEqual(parsedRC, expectedRC);
 
@@ -59,7 +59,7 @@ hostname = https://example.com`;
     };
     const basePath = await mockEnv("", rc);
 
-    const parsedRC = await t.notThrows(load.transifexrc(basePath, 'my site'));
+    const parsedRC = await load.transifexrc(basePath, 'my site');
 
     t.deepEqual(parsedRC, expectedRC);
 
@@ -80,7 +80,7 @@ hostname = https://example.com`;
     };
     const basePath = await mockEnv("", rc);
 
-    const parsedRC = await t.notThrows(load.transifexrc(basePath));
+    const parsedRC = await load.transifexrc(basePath);
 
     t.deepEqual(parsedRC, expectedRC);
 
