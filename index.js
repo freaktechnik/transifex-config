@@ -16,18 +16,21 @@ var matchResource = require("./lib/match-resource");
  * @class
  * @param {string} [basePath] - Path the transifex configuration is in. Defaults
  *                              to the best guess of the package root.
- * @throws The .transifexrc or .tx/config can not be found in the base path.
+ * @param {string} [alternateRCPath] - Path to the RC if it's not in the same
+ *                                     directory as the config.
+ * @throws The .transifexrc or .tx/config can not be found.
  * @exports transifex-config
  */
-function TransifexConfig(basePath) {
+function TransifexConfig(basePath, alternateRCPath) {
     /**
      * Base path the config is read from
      * @type {string}
      */
     this.basePath = basePath || require("app-root-path");
+    this.rcPath = alternateRCPath || this.basePath;
 
     var R_OK = fs.R_OK || fs.constants.R_OK;
-    fs.accessSync(path.join(this.basePath, load.TRANSIFEXRC), R_OK);
+    fs.accessSync(path.join(this.rcPath, load.TRANSIFEXRC), R_OK);
     fs.accessSync(path.join(this.basePath, load.TXCONFIG), R_OK);
 }
 
@@ -62,7 +65,7 @@ TransifexConfig.prototype.getConfig = function() {
  * @this TransifexConfig
  */
 function _getRC(service) {
-    return load.transifexrc(this.basePath, service);
+    return load.transifexrc(this.rcPath, service);
 }
 /**
  * Memoized version of {@link module:transifex-config~_getRC}.
