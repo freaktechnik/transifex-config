@@ -1,6 +1,6 @@
 {
   "name": "transifex-config",
-  "version": "3.1.0",
+  "version": "3.0.2",
   "description": "Reads the transifex client config and offers utility methods on top of it.",
   "main": "index.js",
   "scripts": {
@@ -22,15 +22,9 @@
   },
   "devDependencies": {
     "ava": "^0.22.0",
-<<<<<<< 20e4eac53de597d36da9a938008e49b5dcbd341d
-    "codecov": "^2.0.1",
-    "eslint": "^4.2.0",
-    "eslint-plugin-freaktechnik": "^2.0.0",
-=======
     "codecov": "^2.3.0",
     "eslint": "^4.6.1",
     "eslint-plugin-freaktechnik": "^2.5.0",
->>>>>>> Allos transifexrc to be in a different directory.
     "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^11.2.1",
     "random-string": "^0.2.0"
