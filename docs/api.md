@@ -30,12 +30,13 @@
 ## transifex-config
 **Throws**:
 
-- The .transifexrc or .tx/config can not be found in the base path.
+- The .transifexrc or .tx/config can not be found.
 
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [basePath] | <code>string</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
+| [alternateRCPath] | <code>string</code> | Path to the RC if it's not in the same                                     directory as the config. |
 
 
 * [transifex-config](#module_transifex-config)
@@ -303,8 +304,8 @@ each domain part being a subsection.
 
 <a name="module_transifex-config/lib/match-resource"></a>
 
-## transifex-config/lib/match-resource ⇒ <code>string</code> &#124; <code>boolean</code>
-**Returns**: <code>string</code> &#124; <code>boolean</code> - Returns the language if the file matches the
+## transifex-config/lib/match-resource ⇒ <code>string</code> \| <code>boolean</code>
+**Returns**: <code>string</code> \| <code>boolean</code> - Returns the language if the file matches the
          resource, else returns false.  
 
 | Param | Type | Description |
@@ -340,11 +341,11 @@ Parse a transifex client configuration file. Looks at the file line by line.
 
 <a name="matchFileFilter"></a>
 
-## matchFileFilter(basePath, localPath, fileFilter) ⇒ <code>string</code> &#124; <code>boolean</code>
+## matchFileFilter(basePath, localPath, fileFilter) ⇒ <code>string</code> \| <code>boolean</code>
 Check if a file matches the file_filter rule.
 
 **Kind**: global function  
-**Returns**: <code>string</code> &#124; <code>boolean</code> - REturns the language the file matches or false.  
+**Returns**: <code>string</code> \| <code>boolean</code> - REturns the language the file matches or false.  
 
 | Param | Type | Description |
 | --- | --- | --- |
