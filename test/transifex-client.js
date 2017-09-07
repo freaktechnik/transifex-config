@@ -34,7 +34,7 @@ hostname = https://example.com`;
     const basePath = await mockEnv("", rc);
     const txc = new TransifexConfig(basePath);
 
-    const parsedRC = await t.notThrows(txc.getRC());
+    const parsedRC = await txc.getRC();
 
     t.deepEqual(parsedRC, expectedRC);
 
