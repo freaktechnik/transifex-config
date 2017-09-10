@@ -1,6 +1,6 @@
 {
   "name": "transifex-config",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "description": "Reads the transifex client config and offers utility methods on top of it.",
   "main": "index.js",
   "scripts": {
