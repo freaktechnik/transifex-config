@@ -46,7 +46,7 @@ test("Reading fails when there is no transifexrc", async (t) => {
     const txc = new TransifexConfig(basePath);
     await deleteMockEnv(basePath);
 
-    txc.getRC.cache = {};
+    txc.getRC.cache.clear();
 
     return t.throws(txc.getRC(), Error);
 });

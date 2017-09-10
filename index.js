@@ -4,29 +4,29 @@
  */
 "use strict";
 
-var _ = require("underscore");
-var path = require("path");
-var fs = require("fs");
-var load = require("./lib/load-config");
-var parseLangMap = require("./lib/parse-langmap");
-var errors = require("./lib/errors");
-var matchResource = require("./lib/match-resource");
+const path = require("path"),
+    fs = require("fs"),
+    load = require("./lib/load-config"),
+    parseLangMap = require("./lib/parse-langmap"),
+    errors = require("./lib/errors"),
+    matchResource = require("./lib/match-resource"),
+    memoize = require("lodash.memoize");
 
 /**
  * @class
- * @param {string} [basePath] - Path the transifex configuration is in. Defaults
+ * @param {string} [basePath=require("app-root-path")] - Path the transifex configuration is in. Defaults
  *                              to the best guess of the package root.
  * @throws The .transifexrc or .tx/config can not be found.
  * @exports transifex-config
  */
-function TransifexConfig(basePath) {
+function TransifexConfig(basePath = require("app-root-path")) {
     /**
      * Base path the config is read from
      * @type {string}
      */
-    this.basePath = basePath || require("app-root-path");
+    this.basePath = basePath;
 
-    var R_OK = fs.R_OK || fs.constants.R_OK;
+    const R_OK = fs.R_OK || fs.constants.R_OK;
     fs.accessSync(path.join(this.basePath, load.TRANSIFEXRC), R_OK);
     fs.accessSync(path.join(this.basePath, load.TXCONFIG), R_OK);
 }
@@ -69,7 +69,7 @@ function _getRC(service) {
  *
  * @augments module:transifex-config~_getRC
  */
-TransifexConfig.prototype.getRC = _.memoize(_getRC);
+TransifexConfig.prototype.getRC = memoize(_getRC);
 
 /**
  * @async
@@ -77,20 +77,16 @@ TransifexConfig.prototype.getRC = _.memoize(_getRC);
  * @throws The config could not be read.
  */
 TransifexConfig.prototype.getResources = function() {
-    return this.getConfig().then(function(config) {
-        var resources = [],
-            resource,
-            project;
-        for(var p in config) {
+    return this.getConfig().then((config) => {
+        const resources = [];
+        for(const p in config) {
             if(p != "main") {
-                project = config[p];
-                for(var c in project) {
-                    resource = {
+                const project = config[p];
+                for(const c in project) {
+                    resources.push(Object.assign({
                         project: p,
                         name: c
-                    };
-                    _.extend(resource, project[c]);
-                    resources.push(resource);
+                    }, project[c]));
                 }
             }
         }
@@ -112,17 +108,16 @@ TransifexConfig.prototype.getResources = function() {
  * @throws The config could not be read.
  */
 TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
-    var self = this;
-    return this.getResources().then(function(resources) {
-        var lang,
-            resource = _.find(resources, function(resource) {
-                var result = matchResource(self.basePath, localPath, resource);
-                if(result) {
-                    lang = result;
-                    return true;
-                }
-                return false;
-            });
+    return this.getResources().then((resources) => {
+        let lang;
+        const resource = resources.find((resource) => {
+            const result = matchResource(this.basePath, localPath, resource);
+            if(result) {
+                lang = result;
+                return true;
+            }
+            return false;
+        });
         if(!resource) {
             throw new errors.NoMatchingResourceError(localPath);
         }
@@ -130,7 +125,7 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
             throw new errors.MatchesSourceError(localPath);
         }
         resource.lang = lang;
-        resource.source = lang == resource.source_lang;
+        resource.source = lang === resource.source_lang;
         return resource;
     });
 };
@@ -144,10 +139,9 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
  * @throws The config could not be read.
  */
 TransifexConfig.prototype.isSourceResource = function(path) {
-    var self = this;
-    return this.getResources().then(function(resources) {
-        return _.some(resources, function(resource) {
-            return matchResource(self.basePath, path, resource) == resource.source_lang;
+    return this.getResources().then((resources) => {
+        return resources.some((resource) => {
+            return matchResource(this.basePath, path, resource) == resource.source_lang;
         });
     });
 };
@@ -161,12 +155,12 @@ TransifexConfig.prototype.isSourceResource = function(path) {
  * @throws The config could not be read.
  */
 TransifexConfig.prototype.getMappedLang = function(lang, resource) {
-    return this.getConfig().then(function(globalConfig) {
+    return this.getConfig().then((globalConfig) => {
         if(!resource.lang_map && !globalConfig.main.lang_map) {
             return lang;
         }
         else {
-            var map = parseLangMap(resource.lang_map, parseLangMap(globalConfig.main.lang_map));
+            const map = parseLangMap(resource.lang_map, parseLangMap(globalConfig.main.lang_map));
             if(lang in map) {
                 return map[lang];
             }
