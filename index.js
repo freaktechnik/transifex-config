@@ -27,8 +27,10 @@ function TransifexConfig(basePath = require("app-root-path")) {
     this.basePath = basePath;
 
     const R_OK = fs.R_OK || fs.constants.R_OK;
+    /* eslint-disable no-sync */
     fs.accessSync(path.join(this.basePath, load.TRANSIFEXRC), R_OK);
     fs.accessSync(path.join(this.basePath, load.TXCONFIG), R_OK);
+    /* eslint-enable no-sync */
 }
 
 /**
@@ -133,17 +135,14 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
 /**
  * Check if a resource is the source resource.
  *
- * @param {string} path - Path to check.
+ * @param {string} resourcePath - Path to check.
  * @async
  * @returns {boolean} If the resource is the source.
  * @throws The config could not be read.
  */
-TransifexConfig.prototype.isSourceResource = function(path) {
-    return this.getResources().then((resources) => {
-        return resources.some((resource) => {
-            return matchResource(this.basePath, path, resource) == resource.source_lang;
-        });
-    });
+TransifexConfig.prototype.isSourceResource = function(resourcePath) {
+    return this.getResources()
+        .then((resources) => resources.some((resource) => matchResource(this.basePath, resourcePath, resource) == resource.source_lang));
 };
 
 /**
@@ -159,13 +158,11 @@ TransifexConfig.prototype.getMappedLang = function(lang, resource) {
         if(!resource.lang_map && !globalConfig.main.lang_map) {
             return lang;
         }
-        else {
-            const map = parseLangMap(resource.lang_map, parseLangMap(globalConfig.main.lang_map));
-            if(lang in map) {
-                return map[lang];
-            }
-            return lang;
+        const map = parseLangMap(resource.lang_map, parseLangMap(globalConfig.main.lang_map));
+        if(lang in map) {
+            return map[lang];
         }
+        return lang;
     });
 };
 

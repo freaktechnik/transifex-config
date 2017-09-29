@@ -25,7 +25,7 @@ test("Doesn't match path that includes the full path", (t) => {
 
 test("Get resource from file_filter", (t) => {
     const basePath = "/foo/";
-    const localPath = basePath + "de/de.file";
+    const localPath = `${basePath}de/de.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "source_lang": "en"
@@ -37,7 +37,7 @@ test("Get resource from file_filter", (t) => {
 
 test("File filter needs <lang> to be the same value everywhere", (t) => {
     const basePath = "/foo/";
-    const localPath = basePath + "de/fr.file";
+    const localPath = `${basePath}de/fr.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "source_lang": "en"
@@ -49,7 +49,7 @@ test("File filter needs <lang> to be the same value everywhere", (t) => {
 
 test("Get resource from trans.lang", (t) => {
     const basePath = "/foo/";
-    const localPath = basePath + "custom/my.file";
+    const localPath = `${basePath}custom/my.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "trans.fi": "custom/my.file",
@@ -62,7 +62,7 @@ test("Get resource from trans.lang", (t) => {
 
 test("Get resource from source_file", (t) => {
     const basePath = "/foo/";
-    const localPath = basePath + "source.file";
+    const localPath = `${basePath}source.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "source_file": "source.file",

@@ -4,9 +4,11 @@
   "description": "Reads the transifex client config and offers utility methods on top of it.",
   "main": "index.js",
   "scripts": {
-    "test": "eslint index.js lib/ && nyc ava",
+    "lint": "eslint index.js lib/ test/ --ext js,json",
+    "test": "npm run lint && nyc ava",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "docs": "jsdoc2md index.js lib/*.js > docs/api.md"
+    "docs": "jsdoc2md index.js lib/*.js > docs/api.md",
+    "version": "npm run docs"
   },
   "keywords": [
     "transifex",
@@ -38,5 +40,10 @@
   },
   "engines": {
     "node": ">= 6.11.3"
-  }
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "docs"
+  ]
 }

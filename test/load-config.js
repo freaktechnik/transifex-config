@@ -31,9 +31,7 @@ hostname = https://example.com`;
     await deleteMockEnv(basePath);
 });
 
-test("Reading fails when there is no transifexrc", (t) => {
-    return t.throws(load.transifexrc("/"));
-});
+test("Reading fails when there is no transifexrc", (t) => t.throws(load.transifexrc("/")));
 
 test("Reading falls back to home and fails when transifexrc doesn't contain project", async (t) => {
     const rc = `[my site]
@@ -123,6 +121,4 @@ source_lang=de`;
     await deleteMockEnv(basePath);
 });
 
-test("Reading fails when there is no .tx/config", (t) => {
-    return t.throws(load.txconfig("/"));
-});
+test("Reading fails when there is no .tx/config", (t) => t.throws(load.txconfig("/")));
