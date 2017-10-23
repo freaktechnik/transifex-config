@@ -33,9 +33,9 @@
 - The .transifexrc or .tx/config can not be found.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| [basePath] | <code>string</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [basePath] | <code>string</code> | <code>&quot;require(\&quot;app-root-path\&quot;)&quot;</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
 
 
 * [transifex-config](#module_transifex-config)
@@ -45,7 +45,7 @@
         * [.getConfig()](#module_transifex-config+getConfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
         * [.getResources()](#module_transifex-config+getResources) ⇒ [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection)
         * [.getResource(localPath, [matchSourceLang])](#module_transifex-config+getResource) ⇒ [<code>ConfigSection</code>](#module_transifex-config..ConfigSection)
-        * [.isSourceResource(path)](#module_transifex-config+isSourceResource) ⇒ <code>boolean</code>
+        * [.isSourceResource(resourcePath)](#module_transifex-config+isSourceResource) ⇒ <code>boolean</code>
         * [.getMappedLang(lang, resource)](#module_transifex-config+getMappedLang) ⇒ <code>string</code>
     * _inner_
         * [~_getRC([service])](#module_transifex-config.._getRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
@@ -107,7 +107,7 @@ Memoized version of [_getRC](#module_transifex-config.._getRC).
 
 <a name="module_transifex-config+isSourceResource"></a>
 
-### transifex-config.isSourceResource(path) ⇒ <code>boolean</code>
+### transifex-config.isSourceResource(resourcePath) ⇒ <code>boolean</code>
 Check if a resource is the source resource.
 
 **Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
@@ -120,7 +120,7 @@ Check if a resource is the source resource.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| path | <code>string</code> | Path to check. |
+| resourcePath | <code>string</code> | Path to check. |
 
 <a name="module_transifex-config+getMappedLang"></a>
 
@@ -219,7 +219,7 @@ named after the key with its value assigned.
         * [.txconfig(basePath)](#module_transifex-config/lib/load-config.txconfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
         * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
     * _inner_
-        * [~loadConfig(path)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
+        * [~loadConfig(configPath)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
         * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
 
 <a name="module_transifex-config/lib/load-config.TXCONFIG"></a>
@@ -273,7 +273,7 @@ Loads and parses the transifex login info.
 
 <a name="module_transifex-config/lib/load-config..loadConfig"></a>
 
-### transifex-config/lib/load-config~loadConfig(path) ⇒ <code>string</code>
+### transifex-config/lib/load-config~loadConfig(configPath) ⇒ <code>string</code>
 Loads a file from the given path and returns its contents.
 
 **Kind**: inner method of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
@@ -286,7 +286,7 @@ Loads a file from the given path and returns its contents.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| path | <code>string</code> | Path to the file to load. |
+| configPath | <code>string</code> | Path to the file to load. |
 
 <a name="module_transifex-config/lib/load-config..normalizeRC"></a>
 
