@@ -28,7 +28,7 @@
     "ava": "^0.25.0",
     "codecov": "^3.0.0",
     "eslint": "^4.9.0",
-    "jsdoc-to-markdown": "^3.0.0",
+    "jsdoc-to-markdown": "^4.0.1",
     "nyc": "^11.3.0",
     "random-string": "^0.2.0"
   },
