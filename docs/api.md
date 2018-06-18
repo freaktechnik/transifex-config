@@ -75,7 +75,6 @@ Memoized version of [_getRC](#module_transifex-config.._getRC).
 
 - The config could not be read.
 
-**Async**:   
 <a name="module_transifex-config+getResources"></a>
 
 ### transifex-config.getResources() ⇒ [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection)
@@ -85,7 +84,6 @@ Memoized version of [_getRC](#module_transifex-config.._getRC).
 
 - The config could not be read.
 
-**Async**:   
 <a name="module_transifex-config+getResource"></a>
 
 ### transifex-config.getResource(localPath, [matchSourceLang]) ⇒ [<code>ConfigSection</code>](#module_transifex-config..ConfigSection)
@@ -98,7 +96,6 @@ Memoized version of [_getRC](#module_transifex-config.._getRC).
         is no matching resource.
 - The config could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -116,7 +113,6 @@ Check if a resource is the source resource.
 
 - The config could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -131,7 +127,6 @@ Check if a resource is the source resource.
 
 - The config could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -149,7 +144,6 @@ Check if a resource is the source resource.
 - The .transifexrc could not be read.
 
 **this**: <code>TransifexConfig</code>  
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -247,7 +241,6 @@ Loads and parses the transifex client config.
 
 - The config could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -264,7 +257,6 @@ Loads and parses the transifex login info.
 
 - The rc could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -282,7 +274,6 @@ Loads a file from the given path and returns its contents.
 
 - The file could not be read.
 
-**Async**:   
 
 | Param | Type | Description |
 | --- | --- | --- |
