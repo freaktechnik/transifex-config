@@ -1,6 +1,8 @@
 import test from 'ava';
 import load from '../lib/load-config';
-import { mockEnv, deleteMockEnv } from './_mock-env.js';
+import {
+    mockEnv, deleteMockEnv
+} from './_mock-env.js';
 
 test("File constants", (t) => {
     t.true("TXCONFIG" in load);
