@@ -17,17 +17,17 @@
   "author": "Martin Giger (https://humanoids.be)",
   "license": "MIT",
   "dependencies": {
-    "app-root-path": "^2.0.0",
-    "ini": "^1.3.4",
+    "app-root-path": "^2.1.0",
+    "ini": "^1.3.5",
     "lodash.memoize": "^4.1.2",
     "mz": "^2.7.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^6.0.0",
-    "@freaktechnik/eslint-config-test": "^6.0.0",
+    "@freaktechnik/eslint-config-node": "^6.4.4",
+    "@freaktechnik/eslint-config-test": "^6.4.4",
     "ava": "^0.25.0",
-    "codecov": "^3.0.2",
-    "eslint": "^4.19.1",
+    "codecov": "^3.0.4",
+    "eslint": "^5.1.0",
     "jsdoc-to-markdown": "^4.0.1",
     "nyc": "^12.0.2",
     "random-string": "^0.2.0"
@@ -46,5 +46,11 @@
     "index.js",
     "lib",
     "docs"
-  ]
+  ],
+  "ava": {
+    "files": [
+      "test/*.js",
+      "!test/_*.js"
+    ]
+  }
 }
