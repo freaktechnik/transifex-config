@@ -1,6 +1,6 @@
 import test from 'ava';
 import path from 'path';
-import TransifexConfig from '../';
+import TransifexConfig from '..';
 import {
     mockEnv, deleteMockEnv
 } from './_mock-env.js';
