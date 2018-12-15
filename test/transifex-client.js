@@ -50,7 +50,7 @@ test("Reading fails when there is no transifexrc", async (t) => {
 
     txc.getRC.cache.clear();
 
-    return t.throws(txc.getRC(), Error);
+    return t.throwsAsync(txc.getRC(), Error);
 });
 
 test("read tx config", async (t) => {
@@ -99,7 +99,7 @@ test("Reading fails when there is no .tx/config", async (t) => {
     const txc = new TransifexConfig(basePath);
     await deleteMockEnv(basePath);
 
-    return t.throws(txc.getConfig());
+    return t.throwsAsync(txc.getConfig());
 });
 
 test("get resources only", async (t) => {
@@ -295,8 +295,8 @@ source_lang=en`;
     const basePath = await mockEnv(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throws(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), errors.MatchesSourceError);
-    await t.throws(txc.getResource(path.join(basePath, "locales/source/main.properties")), errors.MatchesSourceError);
+    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), errors.MatchesSourceError);
+    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), errors.MatchesSourceError);
 
     await deleteMockEnv(basePath);
 });
@@ -313,7 +313,7 @@ source_lang=en`;
     const basePath = await mockEnv(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throws(txc.getResource("/full/path/to/nothing.po"), errors.NoMatchingResourceError);
+    await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), errors.NoMatchingResourceError);
 
     await deleteMockEnv(basePath);
 });
@@ -330,7 +330,7 @@ source_lang=en`;
     const basePath = await mockEnv(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throws(txc.getResource("/wrong/path/to/locales/en/main.properties"), errors.NoMatchingResourceError);
+    await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), errors.NoMatchingResourceError);
 
     await deleteMockEnv(basePath);
 });
@@ -348,7 +348,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
     await deleteMockEnv(basePath);
 
-    await t.throws(txc.getResource(path.join(basePath, "locales/en/main.properties")));
+    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/main.properties")));
 });
 
 test("isSourceResource doesn't match non-source resource", async (t) => {
