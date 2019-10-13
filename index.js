@@ -21,7 +21,8 @@ const path = require("path"),
  */
 function TransifexConfig(basePath = require("app-root-path")) {
     /**
-     * Base path the config is read from
+     * Base path the config is read from.
+     *
      * @type {string}
      */
     this.basePath = basePath;
@@ -34,11 +35,11 @@ function TransifexConfig(basePath = require("app-root-path")) {
 }
 
 /**
- * @typedef {Object.<string, string>} ConfigSection
+ * @typedef {object.<string, string>} ConfigSection
  * Has a property for each key in the section, with trimmed name and value.
  */
 /**
- * @typedef {Object.<string, module:transifex-config~ConfigSection>} ParsedConfig
+ * @typedef {object.<string, module:transifex-config~ConfigSection>} ParsedConfig
  * Has a property for each section in the config. Each section has a property
  * named after the key with its value assigned.
  */
@@ -69,7 +70,7 @@ function _getRC(service) {
 /**
  * Memoized version of {@link module:transifex-config~_getRC}.
  *
- * @augments module:transifex-config~_getRC
+ * @extends module:transifex-config~_getRC
  */
 TransifexConfig.prototype.getRC = memoize(_getRC);
 
@@ -112,8 +113,8 @@ TransifexConfig.prototype.getResources = function() {
 TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
     return this.getResources().then((resources) => {
         let lang;
-        const resource = resources.find((resource) => {
-            const result = matchResource(this.basePath, localPath, resource);
+        const resource = resources.find((txResource) => {
+            const result = matchResource(this.basePath, localPath, txResource);
             if(result) {
                 lang = result;
                 return true;

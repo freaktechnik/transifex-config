@@ -9,7 +9,7 @@
 <dd></dd>
 <dt><a href="#module_transifex-config/lib/match-resource">transifex-config/lib/match-resource</a> ⇒ <code>string</code> | <code>boolean</code></dt>
 <dd></dd>
-<dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>Object.&lt;string, string&gt;</code></dt>
+<dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>object.&lt;string, string&gt;</code></dt>
 <dd><p>Parses the language map.</p>
 </dd>
 <dt><a href="#module_transifex-config/lib/parse-rc">transifex-config/lib/parse-rc</a> ⇒ <code><a href="#module_transifex-config..ParsedConfig">ParsedConfig</a></code></dt>
@@ -41,7 +41,7 @@
 * [transifex-config](#module_transifex-config)
     * _instance_
         * [.basePath](#module_transifex-config+basePath) : <code>string</code>
-        * [.getRC](#module_transifex-config+getRC) ⇐ [<code>_getRC</code>](#module_transifex-config.._getRC)
+        * [.getRC](#module_transifex-config+getRC) ⇐ [<code>\_getRC</code>](#module_transifex-config.._getRC)
         * [.getConfig()](#module_transifex-config+getConfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
         * [.getResources()](#module_transifex-config+getResources) ⇒ [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection)
         * [.getResource(localPath, [matchSourceLang])](#module_transifex-config+getResource) ⇒ [<code>ConfigSection</code>](#module_transifex-config..ConfigSection)
@@ -49,22 +49,22 @@
         * [.getMappedLang(lang, resource)](#module_transifex-config+getMappedLang) ⇒ <code>string</code>
     * _inner_
         * [~_getRC([service])](#module_transifex-config.._getRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-        * [~ConfigSection](#module_transifex-config..ConfigSection) : <code>Object.&lt;string, string&gt;</code>
-        * [~ParsedConfig](#module_transifex-config..ParsedConfig) : <code>Object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
+        * [~ConfigSection](#module_transifex-config..ConfigSection) : <code>object.&lt;string, string&gt;</code>
+        * [~ParsedConfig](#module_transifex-config..ParsedConfig) : <code>object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
 
 <a name="module_transifex-config+basePath"></a>
 
 ### transifex-config.basePath : <code>string</code>
-Base path the config is read from
+Base path the config is read from.
 
 **Kind**: instance property of [<code>transifex-config</code>](#module_transifex-config)  
 <a name="module_transifex-config+getRC"></a>
 
-### transifex-config.getRC ⇐ [<code>_getRC</code>](#module_transifex-config.._getRC)
+### transifex-config.getRC ⇐ [<code>\_getRC</code>](#module_transifex-config.._getRC)
 Memoized version of [_getRC](#module_transifex-config.._getRC).
 
 **Kind**: instance property of [<code>transifex-config</code>](#module_transifex-config)  
-**Extends**: [<code>_getRC</code>](#module_transifex-config.._getRC)  
+**Extends**: [<code>\_getRC</code>](#module_transifex-config.._getRC)  
 <a name="module_transifex-config+getConfig"></a>
 
 ### transifex-config.getConfig() ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
@@ -135,7 +135,7 @@ Check if a resource is the source resource.
 
 <a name="module_transifex-config.._getRC"></a>
 
-### transifex-config~_getRC([service]) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+### transifex-config~\_getRC([service]) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
 **Kind**: inner method of [<code>transifex-config</code>](#module_transifex-config)  
 **Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Parsed .transifexrc as an
          object. Will be cached.  
@@ -151,13 +151,13 @@ Check if a resource is the source resource.
 
 <a name="module_transifex-config..ConfigSection"></a>
 
-### transifex-config~ConfigSection : <code>Object.&lt;string, string&gt;</code>
+### transifex-config~ConfigSection : <code>object.&lt;string, string&gt;</code>
 Has a property for each key in the section, with trimmed name and value.
 
 **Kind**: inner typedef of [<code>transifex-config</code>](#module_transifex-config)  
 <a name="module_transifex-config..ParsedConfig"></a>
 
-### transifex-config~ParsedConfig : <code>Object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
+### transifex-config~ParsedConfig : <code>object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
 Has a property for each section in the config. Each section has a property
 named after the key with its value assigned.
 
@@ -290,7 +290,7 @@ each domain part being a subsection.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| rc | <code>Object</code> | RC to normalize. |
+| rc | <code>object</code> | RC to normalize. |
 
 <a name="module_transifex-config/lib/match-resource"></a>
 
@@ -306,16 +306,16 @@ each domain part being a subsection.
 
 <a name="module_transifex-config/lib/parse-langmap"></a>
 
-## transifex-config/lib/parse-langmap ⇒ <code>Object.&lt;string, string&gt;</code>
+## transifex-config/lib/parse-langmap ⇒ <code>object.&lt;string, string&gt;</code>
 Parses the language map.
 
-**Returns**: <code>Object.&lt;string, string&gt;</code> - A map of the language, with the local
+**Returns**: <code>object.&lt;string, string&gt;</code> - A map of the language, with the local
          language code as key and the remote language code as value.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [langMapString] | <code>string</code> | <code>&quot;&#x27;&#x27;&quot;</code> | Language map specification. |
-| [langMap] | <code>Object</code> | <code>{}</code> | Language map to inherit from. |
+| [langMap] | <code>object</code> | <code>{}</code> | Language map to inherit from. |
 
 <a name="module_transifex-config/lib/parse-rc"></a>
 
