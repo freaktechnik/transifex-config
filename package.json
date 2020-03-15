@@ -25,11 +25,11 @@
   "devDependencies": {
     "@freaktechnik/eslint-config-node": "^7.0.0",
     "@freaktechnik/eslint-config-test": "^7.0.0",
-    "ava": "^2.4.0",
+    "ava": "^3.0.0",
     "codecov": "^3.6.1",
     "eslint": "^6.5.1",
     "jsdoc-to-markdown": "^5.0.2",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "random-string": "^0.2.0"
   },
   "bugs": {
