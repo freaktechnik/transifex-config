@@ -50,7 +50,9 @@ test("Reading fails when there is no transifexrc", async (t) => {
 
     txc.getRC.cache.clear();
 
-    return t.throwsAsync(txc.getRC(), Error);
+    return t.throwsAsync(txc.getRC(), {
+        instanceOf: Error
+    });
 });
 
 test("read tx config", async (t) => {
@@ -295,8 +297,12 @@ source_lang=en`;
     const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), errors.MatchesSourceError);
-    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), errors.MatchesSourceError);
+    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), {
+        instanceOf: errors.MatchesSourceError
+    });
+    await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), {
+        instanceOf: errors.MatchesSourceError
+    });
 
     await deleteMockEnvironment(basePath);
 });
@@ -313,7 +319,9 @@ source_lang=en`;
     const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), errors.NoMatchingResourceError);
+    await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), {
+        instanceOf: errors.NoMatchingResourceError
+    });
 
     await deleteMockEnvironment(basePath);
 });
@@ -330,7 +338,9 @@ source_lang=en`;
     const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
-    await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), errors.NoMatchingResourceError);
+    await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), {
+        instanceOf: errors.NoMatchingResourceError
+    });
 
     await deleteMockEnvironment(basePath);
 });

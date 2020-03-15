@@ -23,13 +23,14 @@
     "mz": "^2.7.0"
   },
   "devDependencies": {
+    "@ava/babel": "^1.0.1",
     "@freaktechnik/eslint-config-node": "^7.1.0",
     "@freaktechnik/eslint-config-test": "^7.1.0",
-    "ava": "^2.4.0",
+    "ava": "^3.5.0",
     "codecov": "^3.6.1",
     "eslint": "^6.8.0",
     "jsdoc-to-markdown": "^5.0.3",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "random-string": "^0.2.0"
   },
   "bugs": {
@@ -51,6 +52,7 @@
     "files": [
       "test/*.js",
       "!test/_*.js"
-    ]
+    ],
+    "babel": true
   }
 }
