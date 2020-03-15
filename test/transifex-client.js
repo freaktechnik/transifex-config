@@ -2,7 +2,7 @@ import test from 'ava';
 import path from 'path';
 import TransifexConfig from '..';
 import {
-    mockEnv, deleteMockEnv
+    mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
 } from './_mock-env.js';
 import errors from '../lib/errors';
 
@@ -13,12 +13,12 @@ test("Constructor throws if the files don't exist", (t) => {
 });
 
 test("Constructor stores base path", async (t) => {
-    const basePath = await mockEnv();
+    const basePath = await mockEnvironment();
 
     const txc = new TransifexConfig(basePath);
     t.is(txc.basePath, basePath);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Reading transifexrc", async (t) => {
@@ -33,20 +33,20 @@ hostname = https://example.com`;
             "hostname": "https://example.com"
         }
     };
-    const basePath = await mockEnv("", rc);
+    const basePath = await mockEnvironment("", rc);
     const txc = new TransifexConfig(basePath);
 
     const parsedRC = await txc.getRC();
 
     t.deepEqual(parsedRC, expectedRC);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Reading fails when there is no transifexrc", async (t) => {
-    const basePath = await mockEnv();
+    const basePath = await mockEnvironment();
     const txc = new TransifexConfig(basePath);
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 
     txc.getRC.cache.clear();
 
@@ -81,7 +81,7 @@ source_lang=de`;
             }
         }
     };
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     const parsedConfig = await txc.getConfig();
@@ -91,13 +91,13 @@ source_lang=de`;
     const cachedConfig = await txc.getConfig();
     t.deepEqual(cachedConfig, expectedConfig);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Reading fails when there is no .tx/config", async (t) => {
-    const basePath = await mockEnv();
+    const basePath = await mockEnvironment();
     const txc = new TransifexConfig(basePath);
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 
     return t.throwsAsync(txc.getConfig());
 });
@@ -114,7 +114,7 @@ file_filter=<lang>.bar
 [my_project.second_res]
 file_filter=<lang>.foo
 source_lang=de`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const resources = [
         {
             "project": "my_project",
@@ -136,11 +136,11 @@ source_lang=de`;
     const parsedResources = await txc.getResources();
     t.deepEqual(parsedResources, resources);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Get mapped language without maps", async (t) => {
-    const basePath = await mockEnv(`[main]
+    const basePath = await mockEnvironment(`[main]
 host=https://example.com`);
     const txc = new TransifexConfig(basePath);
 
@@ -151,11 +151,11 @@ host=https://example.com`);
         "source_lang": "en"
     }), "en");
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Get unmapped language with maps", async (t) => {
-    const basePath = await mockEnv(`[main]
+    const basePath = await mockEnvironment(`[main]
 host=https://example.com`);
     const txc = new TransifexConfig(basePath);
 
@@ -167,11 +167,11 @@ host=https://example.com`);
         "source_lang": "en"
     }), "en");
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Get mapped language with map", async (t) => {
-    const basePath = await mockEnv(`[main]
+    const basePath = await mockEnvironment(`[main]
 host=https://example.com`);
     const txc = new TransifexConfig(basePath);
 
@@ -183,11 +183,11 @@ host=https://example.com`);
         "source_lang": "en"
     }), "en_US");
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Get mapped language from global map", async (t) => {
-    const basePath = await mockEnv(`[main]
+    const basePath = await mockEnvironment(`[main]
 host=https://example.com
 lang_map=en_US:en-US`);
     const txc = new TransifexConfig(basePath);
@@ -200,11 +200,11 @@ lang_map=en_US:en-US`);
         "file_filter": "locales/<lang>.file"
     }), "en_US");
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Get mapped language overwritten by resource map", async (t) => {
-    const basePath = await mockEnv(`[main]
+    const basePath = await mockEnvironment(`[main]
 host=https://example.com
 lang_map=en_US:en-US`);
     const txc = new TransifexConfig(basePath);
@@ -217,7 +217,7 @@ lang_map=en_US:en-US`);
         "file_filter": "locales/<lang>.file"
     }), "en");
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource from file_filter", async (t) => {
@@ -229,7 +229,7 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "locales/de/de.properties"));
@@ -238,7 +238,7 @@ source_lang=en`;
     t.is(resource.lang, "de");
     t.false(resource.source);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource from trans.<lang>", async (t) => {
@@ -250,7 +250,7 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "custom/roh/main.properties"));
@@ -259,7 +259,7 @@ source_lang=en`;
     t.is(resource.lang, "rm");
     t.false(resource.source);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource from source_file", async (t) => {
@@ -271,7 +271,7 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "locales/source/main.properties"), true);
@@ -280,7 +280,7 @@ source_lang=en`;
     t.is(resource.lang, "en");
     t.true(resource.source);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource source lang without allowing it", async (t) => {
@@ -292,13 +292,13 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), errors.MatchesSourceError);
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), errors.MatchesSourceError);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource that's not registered", async (t) => {
@@ -310,12 +310,12 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), errors.NoMatchingResourceError);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource only matches if it's the exact path", async (t) => {
@@ -327,12 +327,12 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), errors.NoMatchingResourceError);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("getResource thwrows if it can't read the txconfig", async (t) => {
@@ -344,9 +344,9 @@ source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/main.properties")));
 });
@@ -359,12 +359,12 @@ host = https://example.com
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     t.false(await txc.isSourceResource(path.join(basePath, "locales/custom/file.properties")));
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("isSourceResource doesn't match non-source language", async (t) => {
@@ -375,12 +375,12 @@ host = https://example.com
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     t.false(await txc.isSourceResource(path.join(basePath, "locales/fr/main.properties")));
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("isSourceResource match source language resource", async (t) => {
@@ -391,10 +391,10 @@ host = https://example.com
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
 
     t.true(await txc.isSourceResource(path.join(basePath, "locales/en/main.properties")));
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });

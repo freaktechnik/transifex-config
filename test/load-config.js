@@ -1,7 +1,7 @@
 import test from 'ava';
 import load from '../lib/load-config';
 import {
-    mockEnv, deleteMockEnv
+    mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
 } from './_mock-env.js';
 
 test("File constants", (t) => {
@@ -24,13 +24,13 @@ hostname = https://example.com`;
             "hostname": "https://example.com"
         }
     };
-    const basePath = await mockEnv("", rc);
+    const basePath = await mockEnvironment("", rc);
 
     const parsedRC = await load.transifexrc(basePath);
 
     t.deepEqual(parsedRC, expectedRC);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Reading fails when there is no transifexrc", (t) => { // eslint-disable-line arrow-body-style
@@ -42,7 +42,7 @@ test("Reading falls back to home and fails when transifexrc doesn't contain proj
 username = foo
 password = bar
 hostname = https://example.com`;
-    const basePath = await mockEnv("", rc);
+    const basePath = await mockEnvironment("", rc);
 
     return t.throwsAsync(load.transifexrc(basePath, 'another site'));
 });
@@ -59,13 +59,13 @@ hostname = https://example.com`;
             "hostname": "https://example.com"
         }
     };
-    const basePath = await mockEnv("", rc);
+    const basePath = await mockEnvironment("", rc);
 
     const parsedRC = await load.transifexrc(basePath, 'my site');
 
     t.deepEqual(parsedRC, expectedRC);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Normalize config hostname", async (t) => {
@@ -80,13 +80,13 @@ hostname = https://example.com`;
             "hostname": "https://example.com"
         }
     };
-    const basePath = await mockEnv("", rc);
+    const basePath = await mockEnvironment("", rc);
 
     const parsedRC = await load.transifexrc(basePath);
 
     t.deepEqual(parsedRC, expectedRC);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("read tx config", async (t) => {
@@ -117,12 +117,12 @@ source_lang=de`;
             }
         }
     };
-    const basePath = await mockEnv(config);
+    const basePath = await mockEnvironment(config);
 
     const readConfig = await load.txconfig(basePath);
     t.deepEqual(readConfig, parsedConfig);
 
-    await deleteMockEnv(basePath);
+    await deleteMockEnvironment(basePath);
 });
 
 test("Reading fails when there is no .tx/config", (t) => { // eslint-disable-line arrow-body-style
