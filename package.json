@@ -27,7 +27,7 @@
     "@freaktechnik/eslint-config-test": "^7.2.0",
     "ava": "^3.13.0",
     "codecov": "^3.8.1",
-    "eslint": "^7.13.0",
+    "eslint": "^7.14.0",
     "jsdoc-to-markdown": "^6.0.1",
     "nyc": "^15.1.0",
     "random-string": "^0.2.0"
