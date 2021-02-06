@@ -1,11 +1,11 @@
+'use strict';
+
 const fs = require('mz/fs');
 const os = require('os');
 const path = require('path');
 const randomString = require('random-string');
 
-exports.mockEnv = function(config, rc) {
-    config = config || "";
-    rc = rc || "";
+exports.mockEnv = function(config = "", rc = "") {
     const mockBasePath = path.join(os.tmpdir(), `transifex-config-test-${randomString({
         length: 12
     })}`);
