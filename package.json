@@ -45,6 +45,12 @@
     "lib",
     "docs"
   ],
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  },
   "ava": {
     "files": [
       "test/*.js",
