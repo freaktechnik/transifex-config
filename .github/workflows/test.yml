@@ -3,7 +3,6 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
-    needs: [ lint-js, lint-css, lint-editorconfig, lint-webext ]
     steps:
       - uses: actions/cache@v2
         with:
