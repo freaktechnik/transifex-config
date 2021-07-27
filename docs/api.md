@@ -23,6 +23,8 @@
 <dt><a href="#matchFileFilter">matchFileFilter(basePath, localPath, fileFilter)</a> ⇒ <code>string</code> | <code>boolean</code></dt>
 <dd><p>Check if a file matches the file_filter rule.</p>
 </dd>
+<dt><a href="#ensureObjectKeyPath">ensureObjectKeyPath(keyPath, object)</a> ⇒ <code>object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="module_transifex-config"></a>
@@ -342,4 +344,15 @@ Check if a file matches the file_filter rule.
 | basePath | <code>string</code> | Base path to the transifex config. |
 | localPath | <code>string</code> | Full path to the resource file to match. |
 | fileFilter | <code>string</code> | File filter the resource should match. |
+
+<a name="ensureObjectKeyPath"></a>
+
+## ensureObjectKeyPath(keyPath, object) ⇒ <code>object</code>
+**Kind**: global function  
+**Returns**: <code>object</code> - Reference to the object with the requested keys.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyPath | <code>Array.&lt;string&gt;</code> | Path of keys that should be present in the nested object. |
+| object | <code>object</code> | Object to ensure the keys exist on. |
 
