@@ -3,7 +3,7 @@ import path from 'path';
 import TransifexConfig from '..';
 import {
     mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
-} from './_mock-env.js';
+} from './_mock-environment.js';
 import errors from '../lib/errors';
 
 test("Constructor throws if the files don't exist", (t) => {
@@ -59,27 +59,29 @@ test("read tx config", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[my_project.main_resource]
+[o:test:p:my_project:r:main_resource]
 source_lang=en
 source_file=foo.bar
 file_filter=<lang>.bar
 
-[my_project.second_res]
+[o:test:p:my_project:r:second_res]
 file_filter=<lang>.foo
 source_lang=de`;
     const expectedConfig = {
         "main": {
             "host": "https://example.com"
         },
-        "my_project": {
-            "main_resource": {
-                "source_lang": "en",
-                "source_file": "foo.bar",
-                "file_filter": "<lang>.bar"
-            },
-            "second_res": {
-                "file_filter": "<lang>.foo",
-                "source_lang": "de"
+        "test": {
+            "my_project": {
+                "main_resource": {
+                    "source_lang": "en",
+                    "source_file": "foo.bar",
+                    "file_filter": "<lang>.bar"
+                },
+                "second_res": {
+                    "file_filter": "<lang>.foo",
+                    "source_lang": "de"
+                }
             }
         }
     };
@@ -108,17 +110,18 @@ test("get resources only", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[my_project.main_resource]
+[o:test:p:my_project:r:main_resource]
 source_lang=en
 source_file=foo.bar
 file_filter=<lang>.bar
 
-[my_project.second_res]
+[o:test:p:my_project:r:second_res]
 file_filter=<lang>.foo
 source_lang=de`;
     const basePath = await mockEnvironment(config);
     const resources = [
         {
+            "organization": "test",
             "project": "my_project",
             "name": "main_resource",
             "source_lang": "en",
@@ -126,6 +129,7 @@ source_lang=de`;
             "file_filter": "<lang>.bar"
         },
         {
+            "organization": "test",
             "project": "my_project",
             "name": "second_res",
             "file_filter": "<lang>.foo",
@@ -226,7 +230,7 @@ test("getResource from file_filter", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -235,6 +239,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "locales/de/de.properties"));
+    t.is(resource.organization, "test");
     t.is(resource.project, "project");
     t.is(resource.name, "resource");
     t.is(resource.lang, "de");
@@ -247,7 +252,7 @@ test("getResource from trans.<lang>", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -256,6 +261,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "custom/roh/main.properties"));
+    t.is(resource.organization, "test");
     t.is(resource.project, "project");
     t.is(resource.name, "resource");
     t.is(resource.lang, "rm");
@@ -268,7 +274,7 @@ test("getResource from source_file", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -277,6 +283,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     const resource = await txc.getResource(path.join(basePath, "locales/source/main.properties"), true);
+    t.is(resource.organization, "test");
     t.is(resource.project, "project");
     t.is(resource.name, "resource");
     t.is(resource.lang, "en");
@@ -289,7 +296,7 @@ test("getResource source lang without allowing it", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -311,7 +318,7 @@ test("getResource that's not registered", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -330,7 +337,7 @@ test("getResource only matches if it's the exact path", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -349,7 +356,7 @@ test("getResource thwrows if it can't read the txconfig", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 trans.rm=custom/roh/main.properties
 file_filter=locales/<lang>/<lang>.properties
@@ -365,7 +372,7 @@ test("isSourceResource doesn't match non-source resource", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:tst:p:project:r:resource]
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;
@@ -381,7 +388,7 @@ test("isSourceResource doesn't match non-source language", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;
@@ -397,7 +404,7 @@ test("isSourceResource match source language resource", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[project.resource]
+[o:test:p:project:r:resource]
 source_file=locales/source/main.properties
 file_filter=locales/<lang>/main.properties
 source_lang=en`;

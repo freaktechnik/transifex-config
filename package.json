@@ -17,8 +17,7 @@
   "dependencies": {
     "app-root-path": "^3.0.0",
     "ini": "^2.0.0",
-    "lodash.memoize": "^4.1.2",
-    "mz": "^2.7.0"
+    "lodash.memoize": "^4.1.2"
   },
   "devDependencies": {
     "@ava/babel": "^2.0.0",
@@ -38,7 +37,7 @@
     "url": "git://github.com/freaktechnik/transifex-config.git"
   },
   "engines": {
-    "node": ">= 6.11.3"
+    "node": ">= 12.10.0"
   },
   "files": [
     "index.js",

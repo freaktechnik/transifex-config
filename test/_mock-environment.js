@@ -1,28 +1,29 @@
 'use strict';
 
-const fs = require('mz/fs');
+const { promises: fs } = require('fs');
 const os = require('os');
 const path = require('path');
 const randomString = require('random-string');
 
-exports.mockEnv = function(config = "", rc = "") {
+exports.mockEnv = async function(config = "", rc = "") {
     const mockBasePath = path.join(os.tmpdir(), `transifex-config-test-${randomString({
         length: 12
     })}`);
 
-    return fs.mkdir(mockBasePath).then(() => Promise.all([
+    await fs.mkdir(mockBasePath);
+    await Promise.all([
         fs.mkdir(path.join(mockBasePath, ".tx"))
             .then(() => fs.writeFile(path.join(mockBasePath, ".tx/config"), config)),
         fs.writeFile(path.join(mockBasePath, ".transifexrc"), rc)
-    ]))
-        .then(() => mockBasePath);
+    ]);
+    return mockBasePath;
 };
 
-exports.deleteMockEnv = function(basePath) {
-    return Promise.all([
+exports.deleteMockEnv = async function(basePath) {
+    await Promise.all([
         fs.unlink(path.join(basePath, '.tx/config')),
         fs.unlink(path.join(basePath, '.transifexrc'))
-    ])
-        .then(() => fs.rmdir(path.join(basePath, '.tx')))
-        .then(() => fs.rmdir(basePath));
+    ]);
+    await fs.rmdir(path.join(basePath, '.tx'));
+    await fs.rmdir(basePath);
 };

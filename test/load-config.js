@@ -2,7 +2,7 @@ import test from 'ava';
 import load from '../lib/load-config';
 import {
     mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
-} from './_mock-env.js';
+} from './_mock-environment.js';
 
 test("File constants", (t) => {
     t.true("TXCONFIG" in load);
@@ -93,27 +93,29 @@ test("read tx config", async (t) => {
     const config = `[main]
 host = https://example.com
 
-[my_project.main_resource]
+[o:test:p:my_project:r:main_resource]
 source_lang=en
 source_file=foo.bar
 file_filter=<lang>.bar
 
-[my_project.second_res]
+[o:test:p:my_project:r:second_res]
 file_filter=<lang>.foo
 source_lang=de`;
     const parsedConfig = {
         "main": {
             "host": "https://example.com"
         },
-        "my_project": {
-            "main_resource": {
-                "source_lang": "en",
-                "source_file": "foo.bar",
-                "file_filter": "<lang>.bar"
-            },
-            "second_res": {
-                "file_filter": "<lang>.foo",
-                "source_lang": "de"
+        "test": {
+            "my_project": {
+                "main_resource": {
+                    "source_lang": "en",
+                    "source_file": "foo.bar",
+                    "file_filter": "<lang>.bar"
+                },
+                "second_res": {
+                    "file_filter": "<lang>.foo",
+                    "source_lang": "de"
+                }
             }
         }
     };

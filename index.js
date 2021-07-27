@@ -28,10 +28,10 @@ function TransifexConfig(basePath = require("app-root-path")) {
     this.basePath = basePath;
 
     const R_OK = fs.R_OK || fs.constants.R_OK;
-    /* eslint-disable no-sync */
+    /* eslint-disable node/no-sync */
     fs.accessSync(path.join(this.basePath, load.TRANSIFEXRC), R_OK);
     fs.accessSync(path.join(this.basePath, load.TXCONFIG), R_OK);
-    /* eslint-enable no-sync */
+    /* eslint-enable node/no-sync */
 }
 
 /**
@@ -82,14 +82,25 @@ TransifexConfig.prototype.getRC = memoize(_getRC);
 TransifexConfig.prototype.getResources = function() {
     return this.getConfig().then((config) => {
         const resources = [];
-        for(const p in config) {
-            if(p != "main") {
-                const project = config[p];
-                for(const c in project) {
-                    resources.push(Object.assign({
-                        project: p,
-                        name: c
-                    }, project[c]));
+        for(const [
+            organization,
+            projects
+        ] of Object.entries(config)) {
+            if(organization != "main" && typeof projects === 'object') {
+                for(const [
+                    project,
+                    configResources
+                ] of Object.entries(projects)) {
+                    for(const [
+                        name,
+                        resource
+                    ] of Object.entries(configResources)) {
+                        resources.push(Object.assign({
+                            organization,
+                            project,
+                            name
+                        }, resource));
+                    }
                 }
             }
         }
