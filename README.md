@@ -7,7 +7,7 @@ Reads the transifex client config and offers utility methods on top of it.
 ## Installation
 
 ```sh
-npm install --save transifex-client
+npm install --save transifex-config
 ```
 
 ## Usage
