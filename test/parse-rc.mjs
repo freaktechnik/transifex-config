@@ -1,5 +1,5 @@
 import test from 'ava';
-import parseRC from '../lib/parse-rc';
+import parseRC from '../lib/parse-rc.js';
 
 test("parse rc", (t) => {
     const rc = `[test]

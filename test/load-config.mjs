@@ -1,5 +1,5 @@
 import test from 'ava';
-import load from '../lib/load-config';
+import load from '../lib/load-config.js';
 import {
     mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
 } from './_mock-environment.js';

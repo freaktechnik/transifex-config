@@ -1,5 +1,5 @@
 import test from 'ava';
-import parseLanguageMap from '../lib/parse-langmap';
+import parseLanguageMap from '../lib/parse-langmap.js';
 
 test("parseLanguageMap from string only", (t) => {
     const languageMap = "en : en-US, sr@latin:sr_latin, el:el-GR";

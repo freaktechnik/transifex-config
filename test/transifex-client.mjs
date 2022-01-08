@@ -1,10 +1,10 @@
 import test from 'ava';
 import path from 'path';
-import TransifexConfig from '..';
+import TransifexConfig from '../index.js';
 import {
     mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
 } from './_mock-environment.js';
-import errors from '../lib/errors';
+import errors from '../lib/errors.js';
 
 test("Constructor throws if the files don't exist", (t) => {
     t.throws(() => {

@@ -1,5 +1,5 @@
 import test from 'ava';
-import matchResource from '../lib/match-resource';
+import matchResource from '../lib/match-resource.js';
 
 test("Doesn't match unrelated file", (t) => {
     const basePath = "/foo/";
