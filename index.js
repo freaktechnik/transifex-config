@@ -8,7 +8,9 @@ import {
     txconfig, transifexrc, TRANSIFEXRC, TXCONFIG
 } from "./lib/load-config.js";
 import parseLangMap from "./lib/parse-langmap.js";
-import errors from "./lib/errors.js";
+import {
+    NoMatchingResourceError, MatchesSourceError
+} from "./lib/errors.js";
 import matchResource from "./lib/match-resource.js";
 import memoize from "lodash.memoize";
 import defaultBasePath from "app-root-path";
@@ -134,10 +136,10 @@ TransifexConfig.prototype.getResource = function(localPath, matchSourceLang) {
             return false;
         });
         if(!resource) {
-            throw new errors.NoMatchingResourceError(localPath);
+            throw new NoMatchingResourceError(localPath);
         }
         else if(!matchSourceLang && resource.source_lang == lang) {
-            throw new errors.MatchesSourceError(localPath);
+            throw new MatchesSourceError(localPath);
         }
         resource.lang = lang;
         resource.source = lang === resource.source_lang;
