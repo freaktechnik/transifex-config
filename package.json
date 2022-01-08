@@ -20,10 +20,10 @@
     "lodash.memoize": "^4.1.2"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^8.0.2",
-    "@freaktechnik/eslint-config-test": "^8.0.2",
+    "@freaktechnik/eslint-config-node": "^9.0.3",
+    "@freaktechnik/eslint-config-test": "^9.0.1",
     "ava": "^4.0.1",
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "jsdoc-to-markdown": "^7.1.0",
     "nyc": "^15.1.0",
     "random-string": "^0.2.0"
@@ -51,7 +51,9 @@
   },
   "ava": {
     "files": [
-      "test/*.mjs"
+      "test/*.js",
+      "!test/_*.js"
     ]
-  }
+  },
+  "type": "module"
 }

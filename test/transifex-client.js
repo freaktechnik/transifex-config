@@ -1,10 +1,12 @@
 import test from 'ava';
-import path from 'path';
+import path from 'node:path';
 import TransifexConfig from '../index.js';
 import {
-    mockEnv as mockEnvironment, deleteMockEnv as deleteMockEnvironment
+    mockEnvironment, deleteMockEnvironment
 } from './_mock-environment.js';
-import errors from '../lib/errors.js';
+import {
+    NoMatchingResourceError, MatchesSourceError
+} from '../lib/errors.js';
 
 test("Constructor throws if the files don't exist", (t) => {
     t.throws(() => {
@@ -305,10 +307,10 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), {
-        instanceOf: errors.MatchesSourceError
+        instanceOf: MatchesSourceError
     });
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), {
-        instanceOf: errors.MatchesSourceError
+        instanceOf: MatchesSourceError
     });
 
     await deleteMockEnvironment(basePath);
@@ -327,7 +329,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), {
-        instanceOf: errors.NoMatchingResourceError
+        instanceOf: NoMatchingResourceError
     });
 
     await deleteMockEnvironment(basePath);
@@ -346,7 +348,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), {
-        instanceOf: errors.NoMatchingResourceError
+        instanceOf: NoMatchingResourceError
     });
 
     await deleteMockEnvironment(basePath);

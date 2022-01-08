@@ -2,15 +2,16 @@
  * @author Martin Giger
  * @license MIT
  */
-"use strict";
-
-const path = require("path"),
-    fs = require("fs"),
-    load = require("./lib/load-config"),
-    parseLangMap = require("./lib/parse-langmap"),
-    errors = require("./lib/errors"),
-    matchResource = require("./lib/match-resource"),
-    memoize = require("lodash.memoize");
+import path from "node:path";
+import fs from "node:fs";
+import {
+    txconfig, transifexrc, TRANSIFEXRC, TXCONFIG
+} from "./lib/load-config.js";
+import parseLangMap from "./lib/parse-langmap.js";
+import errors from "./lib/errors.js";
+import matchResource from "./lib/match-resource.js";
+import memoize from "lodash.memoize";
+import defaultBasePath from "app-root-path";
 
 /**
  * @class
@@ -19,7 +20,7 @@ const path = require("path"),
  * @throws The .transifexrc or .tx/config can not be found.
  * @exports transifex-config
  */
-function TransifexConfig(basePath = require("app-root-path")) {
+function TransifexConfig(basePath = defaultBasePath) {
     /**
      * Base path the config is read from.
      *
@@ -29,8 +30,8 @@ function TransifexConfig(basePath = require("app-root-path")) {
 
     const R_OK = fs.R_OK || fs.constants.R_OK;
     /* eslint-disable node/no-sync */
-    fs.accessSync(path.join(this.basePath, load.TRANSIFEXRC), R_OK);
-    fs.accessSync(path.join(this.basePath, load.TXCONFIG), R_OK);
+    fs.accessSync(path.join(this.basePath, TRANSIFEXRC), R_OK);
+    fs.accessSync(path.join(this.basePath, TXCONFIG), R_OK);
     /* eslint-enable node/no-sync */
 }
 
@@ -51,7 +52,7 @@ function TransifexConfig(basePath = require("app-root-path")) {
  */
 TransifexConfig.prototype.getConfig = function() {
     if(!this._txconfig) {
-        this._txconfig = load.txconfig(this.basePath);
+        this._txconfig = txconfig(this.basePath);
     }
     return this._txconfig;
 };
@@ -65,7 +66,7 @@ TransifexConfig.prototype.getConfig = function() {
  * @this TransifexConfig
  */
 function _getRC(service) {
-    return load.transifexrc(this.basePath, service);
+    return transifexrc(this.basePath, service);
 }
 /**
  * Memoized version of {@link module:transifex-config~_getRC}.
@@ -178,4 +179,4 @@ TransifexConfig.prototype.getMappedLang = function(lang, resource) {
     });
 };
 
-module.exports = TransifexConfig;
+export default TransifexConfig;

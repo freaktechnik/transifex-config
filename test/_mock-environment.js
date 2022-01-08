@@ -1,11 +1,16 @@
-'use strict';
+import { promises as fs } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import randomString from 'random-string';
 
-const { promises: fs } = require('fs');
-const os = require('os');
-const path = require('path');
-const randomString = require('random-string');
-
-exports.mockEnv = async function(config = "", rc = "") {
+/**
+ * Creates a temporary mock file root
+ *
+ * @param {string} config - Contents of the transifexconfig
+ * @param {string} rc - Contents of the transifexrc
+ * @returns {string} base path to the mock env
+ */
+export async function mockEnvironment(config = "", rc = "") {
     const mockBasePath = path.join(os.tmpdir(), `transifex-config-test-${randomString({
         length: 12
     })}`);
@@ -17,13 +22,18 @@ exports.mockEnv = async function(config = "", rc = "") {
         fs.writeFile(path.join(mockBasePath, ".transifexrc"), rc)
     ]);
     return mockBasePath;
-};
+}
 
-exports.deleteMockEnv = async function(basePath) {
+/**
+ * Clean up a temporary mock file root.
+ *
+ * @param {string} basePath
+ */
+export async function deleteMockEnvironment(basePath) {
     await Promise.all([
         fs.unlink(path.join(basePath, '.tx/config')),
         fs.unlink(path.join(basePath, '.transifexrc'))
     ]);
     await fs.rmdir(path.join(basePath, '.tx'));
     await fs.rmdir(basePath);
-};
+}
