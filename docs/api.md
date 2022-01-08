@@ -17,6 +17,13 @@
 </dd>
 </dl>
 
+## Constants
+
+<dl>
+<dt><a href="#MAP_MIN_LENGTH">MAP_MIN_LENGTH</a></dt>
+<dd></dd>
+</dl>
+
 ## Functions
 
 <dl>
@@ -172,9 +179,9 @@ named after the key with its value assigned.
 
 * [transifex-config/lib/errors](#module_transifex-config/lib/errors)
     * [.NoMatchingResourceError](#module_transifex-config/lib/errors.NoMatchingResourceError)
-        * [new NoMatchingResourceError(resource)](#new_module_transifex-config/lib/errors.NoMatchingResourceError_new)
+        * [new exports.NoMatchingResourceError(resource)](#new_module_transifex-config/lib/errors.NoMatchingResourceError_new)
     * [.MatchesSourceError](#module_transifex-config/lib/errors.MatchesSourceError)
-        * [new MatchesSourceError(resource)](#new_module_transifex-config/lib/errors.MatchesSourceError_new)
+        * [new exports.MatchesSourceError(resource)](#new_module_transifex-config/lib/errors.MatchesSourceError_new)
 
 <a name="module_transifex-config/lib/errors.NoMatchingResourceError"></a>
 
@@ -183,7 +190,7 @@ named after the key with its value assigned.
 **Implements**: <code>Error</code>  
 <a name="new_module_transifex-config/lib/errors.NoMatchingResourceError_new"></a>
 
-#### new NoMatchingResourceError(resource)
+#### new exports.NoMatchingResourceError(resource)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -196,7 +203,7 @@ named after the key with its value assigned.
 **Implements**: <code>Error</code>  
 <a name="new_module_transifex-config/lib/errors.MatchesSourceError_new"></a>
 
-#### new MatchesSourceError(resource)
+#### new exports.MatchesSourceError(resource)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -210,24 +217,24 @@ named after the key with its value assigned.
 
 * [transifex-config/lib/load-config](#module_transifex-config/lib/load-config)
     * _static_
-        * [.TXCONFIG](#module_transifex-config/lib/load-config.TXCONFIG) : <code>string</code>
         * [.TRANSIFEXRC](#module_transifex-config/lib/load-config.TRANSIFEXRC) : <code>string</code>
+        * [.TXCONFIG](#module_transifex-config/lib/load-config.TXCONFIG) : <code>string</code>
         * [.txconfig(basePath)](#module_transifex-config/lib/load-config.txconfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
         * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
     * _inner_
         * [~loadConfig(configPath)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
         * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
 
-<a name="module_transifex-config/lib/load-config.TXCONFIG"></a>
+<a name="module_transifex-config/lib/load-config.TRANSIFEXRC"></a>
 
-### transifex-config/lib/load-config.TXCONFIG : <code>string</code>
+### transifex-config/lib/load-config.TRANSIFEXRC : <code>string</code>
 File name of the config file from the base path.
 
 **Kind**: static constant of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
 **Read only**: true  
-<a name="module_transifex-config/lib/load-config.TRANSIFEXRC"></a>
+<a name="module_transifex-config/lib/load-config.TXCONFIG"></a>
 
-### transifex-config/lib/load-config.TRANSIFEXRC : <code>string</code>
+### transifex-config/lib/load-config.TXCONFIG : <code>string</code>
 File name of the rc file from the base path.
 
 **Kind**: static constant of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
@@ -331,6 +338,12 @@ Parse a transifex client configuration file. Looks at the file line by line.
 | --- | --- | --- |
 | content | <code>string</code> | Configuration file contents. |
 
+<a name="MAP_MIN_LENGTH"></a>
+
+## MAP\_MIN\_LENGTH
+**Kind**: global constant  
+**Author**: Martin Giger  
+**License**: MIT  
 <a name="matchFileFilter"></a>
 
 ## matchFileFilter(basePath, localPath, fileFilter) ⇒ <code>string</code> \| <code>boolean</code>
