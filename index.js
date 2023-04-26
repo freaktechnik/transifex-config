@@ -38,7 +38,7 @@ function _getRC(service) {
 }
 
 /**
- * @exports transifex-config
+ * @exports module:transifex-config
  * @class
  */
 class TransifexConfig {
