@@ -177,7 +177,7 @@ class TransifexConfig {
             return lang;
         }
         const map = parseLangMap(resource.lang_map, parseLangMap(globalConfig.main.lang_map));
-        if(Object.hasOwn(lang, map)) {
+        if(Object.hasOwn(map, lang)) {
             return map[lang];
         }
         return lang;
