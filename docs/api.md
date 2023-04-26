@@ -1,20 +1,25 @@
 ## Modules
 
 <dl>
-<dt><a href="#module_transifex-config">transifex-config</a></dt>
-<dd></dd>
 <dt><a href="#module_transifex-config/lib/errors">transifex-config/lib/errors</a></dt>
 <dd></dd>
 <dt><a href="#module_transifex-config/lib/load-config">transifex-config/lib/load-config</a></dt>
 <dd></dd>
 <dt><a href="#module_transifex-config/lib/match-resource">transifex-config/lib/match-resource</a> ⇒ <code>string</code> | <code>boolean</code></dt>
 <dd></dd>
-<dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>object.&lt;string, string&gt;</code></dt>
+<dt><a href="#module_transifex-config/lib/parse-langmap">transifex-config/lib/parse-langmap</a> ⇒ <code>Record.&lt;string, string&gt;</code></dt>
 <dd><p>Parses the language map.</p>
 </dd>
-<dt><a href="#module_transifex-config/lib/parse-rc">transifex-config/lib/parse-rc</a> ⇒ <code><a href="#module_transifex-config..ParsedConfig">ParsedConfig</a></code></dt>
+<dt><a href="#module_transifex-config/lib/parse-rc">transifex-config/lib/parse-rc</a> ⇒ <code>module:transifex-config~ParsedConfig</code></dt>
 <dd><p>Parse a transifex client configuration file. Looks at the file line by line.</p>
 </dd>
+</dl>
+
+## Classes
+
+<dl>
+<dt><a href="#transifex-config">transifex-config</a></dt>
+<dd></dd>
 </dl>
 
 ## Constants
@@ -27,6 +32,8 @@
 ## Functions
 
 <dl>
+<dt><a href="#_getRC">_getRC([service])</a> ⇒ <code>module:transifex-config~ParsedConfig</code></dt>
+<dd></dd>
 <dt><a href="#matchFileFilter">matchFileFilter(basePath, localPath, fileFilter)</a> ⇒ <code>string</code> | <code>boolean</code></dt>
 <dd><p>Check if a file matches the file_filter rule.</p>
 </dd>
@@ -34,143 +41,18 @@
 <dd></dd>
 </dl>
 
-<a name="module_transifex-config"></a>
+## Typedefs
 
-## transifex-config
-**Throws**:
+<dl>
+<dt><a href="#ConfigSection">ConfigSection</a> : <code>Record.&lt;string, string&gt;</code></dt>
+<dd><p>Has a property for each key in the section, with trimmed name and value.</p>
+</dd>
+<dt><a href="#ParsedConfig">ParsedConfig</a> : <code>Record.&lt;string, module:transifex-config~ConfigSection&gt;</code></dt>
+<dd><p>Has a property for each section in the config. Each section has a property
+named after the key with its value assigned.</p>
+</dd>
+</dl>
 
-- The .transifexrc or .tx/config can not be found.
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [basePath] | <code>string</code> | <code>&quot;require(\&quot;app-root-path\&quot;)&quot;</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
-
-
-* [transifex-config](#module_transifex-config)
-    * _instance_
-        * [.basePath](#module_transifex-config+basePath) : <code>string</code>
-        * [.getRC](#module_transifex-config+getRC) ⇐ [<code>\_getRC</code>](#module_transifex-config.._getRC)
-        * [.getConfig()](#module_transifex-config+getConfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-        * [.getResources()](#module_transifex-config+getResources) ⇒ [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection)
-        * [.getResource(localPath, [matchSourceLang])](#module_transifex-config+getResource) ⇒ [<code>ConfigSection</code>](#module_transifex-config..ConfigSection)
-        * [.isSourceResource(resourcePath)](#module_transifex-config+isSourceResource) ⇒ <code>boolean</code>
-        * [.getMappedLang(lang, resource)](#module_transifex-config+getMappedLang) ⇒ <code>string</code>
-    * _inner_
-        * [~_getRC([service])](#module_transifex-config.._getRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-        * [~ConfigSection](#module_transifex-config..ConfigSection) : <code>object.&lt;string, string&gt;</code>
-        * [~ParsedConfig](#module_transifex-config..ParsedConfig) : <code>object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
-
-<a name="module_transifex-config+basePath"></a>
-
-### transifex-config.basePath : <code>string</code>
-Base path the config is read from.
-
-**Kind**: instance property of [<code>transifex-config</code>](#module_transifex-config)  
-<a name="module_transifex-config+getRC"></a>
-
-### transifex-config.getRC ⇐ [<code>\_getRC</code>](#module_transifex-config.._getRC)
-Memoized version of [_getRC](#module_transifex-config.._getRC).
-
-**Kind**: instance property of [<code>transifex-config</code>](#module_transifex-config)  
-**Extends**: [<code>\_getRC</code>](#module_transifex-config.._getRC)  
-<a name="module_transifex-config+getConfig"></a>
-
-### transifex-config.getConfig() ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-**Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Parsed .tx/config as an
-         object. Will be cached.  
-**Throws**:
-
-- The config could not be read.
-
-<a name="module_transifex-config+getResources"></a>
-
-### transifex-config.getResources() ⇒ [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection)
-**Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: [<code>Array.&lt;ConfigSection&gt;</code>](#module_transifex-config..ConfigSection) - Array of resources.  
-**Throws**:
-
-- The config could not be read.
-
-<a name="module_transifex-config+getResource"></a>
-
-### transifex-config.getResource(localPath, [matchSourceLang]) ⇒ [<code>ConfigSection</code>](#module_transifex-config..ConfigSection)
-**Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: [<code>ConfigSection</code>](#module_transifex-config..ConfigSection) - Config section for the
-         resource.  
-**Throws**:
-
-- [<code>NoMatchingResourceError</code>](#module_transifex-config/lib/errors.NoMatchingResourceError) There
-        is no matching resource.
-- The config could not be read.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| localPath | <code>string</code> | Absolute local path of the resource to return the                             config entry of. |
-| [matchSourceLang] | <code>boolean</code> | If the resource should be returned                                            when the path is for the source                                            language of the resource. |
-
-<a name="module_transifex-config+isSourceResource"></a>
-
-### transifex-config.isSourceResource(resourcePath) ⇒ <code>boolean</code>
-Check if a resource is the source resource.
-
-**Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: <code>boolean</code> - If the resource is the source.  
-**Throws**:
-
-- The config could not be read.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| resourcePath | <code>string</code> | Path to check. |
-
-<a name="module_transifex-config+getMappedLang"></a>
-
-### transifex-config.getMappedLang(lang, resource) ⇒ <code>string</code>
-**Kind**: instance method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: <code>string</code> - Mapped language code.  
-**Throws**:
-
-- The config could not be read.
-
-
-| Param | Type | Description |
-| --- | --- | --- |
-| lang | <code>string</code> | Language code to map from local to external. |
-| resource | [<code>ConfigSection</code>](#module_transifex-config..ConfigSection) | Resource to get map                                                           the language for. |
-
-<a name="module_transifex-config.._getRC"></a>
-
-### transifex-config~\_getRC([service]) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-**Kind**: inner method of [<code>transifex-config</code>](#module_transifex-config)  
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Parsed .transifexrc as an
-         object. Will be cached.  
-**Throws**:
-
-- The .transifexrc could not be read.
-
-**this**: <code>TransifexConfig</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [service] | <code>string</code> | The config should contain this service URL. |
-
-<a name="module_transifex-config..ConfigSection"></a>
-
-### transifex-config~ConfigSection : <code>object.&lt;string, string&gt;</code>
-Has a property for each key in the section, with trimmed name and value.
-
-**Kind**: inner typedef of [<code>transifex-config</code>](#module_transifex-config)  
-<a name="module_transifex-config..ParsedConfig"></a>
-
-### transifex-config~ParsedConfig : <code>object.&lt;string, module:transifex-config~ConfigSection&gt;</code>
-Has a property for each section in the config. Each section has a property
-named after the key with its value assigned.
-
-**Kind**: inner typedef of [<code>transifex-config</code>](#module_transifex-config)  
 <a name="module_transifex-config/lib/errors"></a>
 
 ## transifex-config/lib/errors
@@ -219,11 +101,11 @@ named after the key with its value assigned.
     * _static_
         * [.TRANSIFEXRC](#module_transifex-config/lib/load-config.TRANSIFEXRC) : <code>string</code>
         * [.TXCONFIG](#module_transifex-config/lib/load-config.TXCONFIG) : <code>string</code>
-        * [.txconfig(basePath)](#module_transifex-config/lib/load-config.txconfig) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
-        * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+        * [.txconfig(basePath)](#module_transifex-config/lib/load-config.txconfig) ⇒ <code>module:transifex-config~ParsedConfig</code>
+        * [.transifexrc(basePath, [service])](#module_transifex-config/lib/load-config.transifexrc) ⇒ <code>module:transifex-config~ParsedConfig</code>
     * _inner_
         * [~loadConfig(configPath)](#module_transifex-config/lib/load-config..loadConfig) ⇒ <code>string</code>
-        * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+        * [~normalizeRC(rc)](#module_transifex-config/lib/load-config..normalizeRC) ⇒ <code>module:transifex-config~ParsedConfig</code>
 
 <a name="module_transifex-config/lib/load-config.TRANSIFEXRC"></a>
 
@@ -241,11 +123,11 @@ File name of the rc file from the base path.
 **Read only**: true  
 <a name="module_transifex-config/lib/load-config.txconfig"></a>
 
-### transifex-config/lib/load-config.txconfig(basePath) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+### transifex-config/lib/load-config.txconfig(basePath) ⇒ <code>module:transifex-config~ParsedConfig</code>
 Loads and parses the transifex client config.
 
 **Kind**: static method of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Parsed contents of the config.  
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Parsed contents of the config.  
 **Throws**:
 
 - The config could not be read.
@@ -257,11 +139,11 @@ Loads and parses the transifex client config.
 
 <a name="module_transifex-config/lib/load-config.transifexrc"></a>
 
-### transifex-config/lib/load-config.transifexrc(basePath, [service]) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+### transifex-config/lib/load-config.transifexrc(basePath, [service]) ⇒ <code>module:transifex-config~ParsedConfig</code>
 Loads and parses the transifex login info.
 
 **Kind**: static method of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Parsed contents of the rc.  
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Parsed contents of the rc.  
 **Throws**:
 
 - The rc could not be read.
@@ -290,12 +172,12 @@ Loads a file from the given path and returns its contents.
 
 <a name="module_transifex-config/lib/load-config..normalizeRC"></a>
 
-### transifex-config/lib/load-config~normalizeRC(rc) ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+### transifex-config/lib/load-config~normalizeRC(rc) ⇒ <code>module:transifex-config~ParsedConfig</code>
 Fixes the header names of the RC by re-assembling the host names instead of
 each domain part being a subsection.
 
 **Kind**: inner method of [<code>transifex-config/lib/load-config</code>](#module_transifex-config/lib/load-config)  
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Normalized RC.  
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Normalized RC.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -315,10 +197,10 @@ each domain part being a subsection.
 
 <a name="module_transifex-config/lib/parse-langmap"></a>
 
-## transifex-config/lib/parse-langmap ⇒ <code>object.&lt;string, string&gt;</code>
+## transifex-config/lib/parse-langmap ⇒ <code>Record.&lt;string, string&gt;</code>
 Parses the language map.
 
-**Returns**: <code>object.&lt;string, string&gt;</code> - A map of the language, with the local
+**Returns**: <code>Record.&lt;string, string&gt;</code> - A map of the language, with the local
          language code as key and the remote language code as value.  
 
 | Param | Type | Default | Description |
@@ -328,15 +210,123 @@ Parses the language map.
 
 <a name="module_transifex-config/lib/parse-rc"></a>
 
-## transifex-config/lib/parse-rc ⇒ [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig)
+## transifex-config/lib/parse-rc ⇒ <code>module:transifex-config~ParsedConfig</code>
 Parse a transifex client configuration file. Looks at the file line by line.
 
-**Returns**: [<code>ParsedConfig</code>](#module_transifex-config..ParsedConfig) - Configuration file
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Configuration file
          represented as an object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | content | <code>string</code> | Configuration file contents. |
+
+<a name="transifex-config"></a>
+
+## transifex-config
+**Kind**: global class  
+
+* [transifex-config](#transifex-config)
+    * [new TransifexConfig([basePath])](#new_transifex-config_new)
+    * [.basePath](#transifex-config+basePath) : <code>string</code>
+    * [.getRC](#transifex-config+getRC) ⇐ <code>module:transifex-config~\_getRC</code>
+    * [.getConfig()](#transifex-config+getConfig) ⇒ <code>module:transifex-config~ParsedConfig</code>
+    * [.getResources()](#transifex-config+getResources) ⇒ <code>Array.&lt;module:transifex-config~ConfigSection&gt;</code>
+    * [.getResource(localPath, [matchSourceLang])](#transifex-config+getResource) ⇒ <code>module:transifex-config~ConfigSection</code>
+    * [.isSourceResource(resourcePath)](#transifex-config+isSourceResource) ⇒ <code>boolean</code>
+    * [.getMappedLang(lang, resource)](#transifex-config+getMappedLang) ⇒ <code>string</code>
+
+<a name="new_transifex-config_new"></a>
+
+### new TransifexConfig([basePath])
+**Throws**:
+
+- The .transifexrc or .tx/config can not be found.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [basePath] | <code>string</code> | <code>&quot;require(\&quot;app-root-path\&quot;)&quot;</code> | Path the transifex configuration is in. Defaults                              to the best guess of the package root. |
+
+<a name="transifex-config+basePath"></a>
+
+### transifex-config.basePath : <code>string</code>
+Base path the config is read from.
+
+**Kind**: instance property of [<code>transifex-config</code>](#transifex-config)  
+<a name="transifex-config+getRC"></a>
+
+### transifex-config.getRC ⇐ <code>module:transifex-config~\_getRC</code>
+Memoized version of [module:transifex-config~_getRC](module:transifex-config~_getRC).
+
+**Kind**: instance property of [<code>transifex-config</code>](#transifex-config)  
+**Extends**: <code>module:transifex-config~\_getRC</code>  
+<a name="transifex-config+getConfig"></a>
+
+### transifex-config.getConfig() ⇒ <code>module:transifex-config~ParsedConfig</code>
+**Kind**: instance method of [<code>transifex-config</code>](#transifex-config)  
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Parsed .tx/config as an
+         object. Will be cached.  
+**Throws**:
+
+- The config could not be read.
+
+<a name="transifex-config+getResources"></a>
+
+### transifex-config.getResources() ⇒ <code>Array.&lt;module:transifex-config~ConfigSection&gt;</code>
+**Kind**: instance method of [<code>transifex-config</code>](#transifex-config)  
+**Returns**: <code>Array.&lt;module:transifex-config~ConfigSection&gt;</code> - Array of resources.  
+**Throws**:
+
+- The config could not be read.
+
+<a name="transifex-config+getResource"></a>
+
+### transifex-config.getResource(localPath, [matchSourceLang]) ⇒ <code>module:transifex-config~ConfigSection</code>
+**Kind**: instance method of [<code>transifex-config</code>](#transifex-config)  
+**Returns**: <code>module:transifex-config~ConfigSection</code> - Config section for the
+         resource.  
+**Throws**:
+
+- [<code>NoMatchingResourceError</code>](#module_transifex-config/lib/errors.NoMatchingResourceError) There
+        is no matching resource.
+- The config could not be read.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| localPath | <code>string</code> | Absolute local path of the resource to return the                             config entry of. |
+| [matchSourceLang] | <code>boolean</code> | If the resource should be returned                                            when the path is for the source                                            language of the resource. |
+
+<a name="transifex-config+isSourceResource"></a>
+
+### transifex-config.isSourceResource(resourcePath) ⇒ <code>boolean</code>
+Check if a resource is the source resource.
+
+**Kind**: instance method of [<code>transifex-config</code>](#transifex-config)  
+**Returns**: <code>boolean</code> - If the resource is the source.  
+**Throws**:
+
+- The config could not be read.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| resourcePath | <code>string</code> | Path to check. |
+
+<a name="transifex-config+getMappedLang"></a>
+
+### transifex-config.getMappedLang(lang, resource) ⇒ <code>string</code>
+**Kind**: instance method of [<code>transifex-config</code>](#transifex-config)  
+**Returns**: <code>string</code> - Mapped language code.  
+**Throws**:
+
+- The config could not be read.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lang | <code>string</code> | Language code to map from local to external. |
+| resource | <code>module:transifex-config~ConfigSection</code> | Resource to get map                                                           the language for. |
 
 <a name="MAP_MIN_LENGTH"></a>
 
@@ -344,6 +334,22 @@ Parse a transifex client configuration file. Looks at the file line by line.
 **Kind**: global constant  
 **Author**: Martin Giger  
 **License**: MIT  
+<a name="_getRC"></a>
+
+## \_getRC([service]) ⇒ <code>module:transifex-config~ParsedConfig</code>
+**Kind**: global function  
+**Returns**: <code>module:transifex-config~ParsedConfig</code> - Parsed .transifexrc as an
+         object. Will be cached.  
+**Throws**:
+
+- The .transifexrc could not be read.
+
+**this**: <code>{TransifexConfig}</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [service] | <code>string</code> | The config should contain this service URL. |
+
 <a name="matchFileFilter"></a>
 
 ## matchFileFilter(basePath, localPath, fileFilter) ⇒ <code>string</code> \| <code>boolean</code>
@@ -369,3 +375,16 @@ Check if a file matches the file_filter rule.
 | keyPath | <code>Array.&lt;string&gt;</code> | Path of keys that should be present in the nested object. |
 | object | <code>object</code> | Object to ensure the keys exist on. |
 
+<a name="ConfigSection"></a>
+
+## ConfigSection : <code>Record.&lt;string, string&gt;</code>
+Has a property for each key in the section, with trimmed name and value.
+
+**Kind**: global typedef  
+<a name="ParsedConfig"></a>
+
+## ParsedConfig : <code>Record.&lt;string, module:transifex-config~ConfigSection&gt;</code>
+Has a property for each section in the config. Each section has a property
+named after the key with its value assigned.
+
+**Kind**: global typedef  
