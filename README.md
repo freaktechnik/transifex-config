@@ -16,9 +16,9 @@ The module exports a single class, that implements methods to read and get
 specific parts of the config for the client.
 
 ```js
-var TransifexConfig = require("transifex-config");
+import TransifexConfig from "transifex-config";
 
-var txc = new TransifexConifg();
+const txc = new TransifexConifg();
 ```
 
 ## API Documentation
