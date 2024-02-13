@@ -1,6 +1,6 @@
 # transifex-config
 
-[![codecov](https://codecov.io/gh/freaktechnik/transifex-config/branch/master/graph/badge.svg)](https://codecov.io/gh/freaktechnik/transifex-config)
+[![codecov](https://codecov.io/gh/freaktechnik/transifex-config/graph/badge.svg?token=dm2xqIgPQU)](https://codecov.io/gh/freaktechnik/transifex-config)
 
 Reads the transifex client config and offers utility methods on top of it.
 
