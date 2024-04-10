@@ -12,14 +12,14 @@ import randomString from 'random-string';
  */
 export async function mockEnvironment(config = "", rc = "") {
     const mockBasePath = path.join(os.tmpdir(), `transifex-config-test-${randomString({
-        length: 12
+        length: 12,
     })}`);
 
     await fs.mkdir(mockBasePath);
     await Promise.all([
         fs.mkdir(path.join(mockBasePath, ".tx"))
             .then(() => fs.writeFile(path.join(mockBasePath, ".tx/config"), config)),
-        fs.writeFile(path.join(mockBasePath, ".transifexrc"), rc)
+        fs.writeFile(path.join(mockBasePath, ".transifexrc"), rc),
     ]);
     return mockBasePath;
 }
@@ -32,7 +32,7 @@ export async function mockEnvironment(config = "", rc = "") {
 export async function deleteMockEnvironment(basePath) {
     await Promise.all([
         fs.unlink(path.join(basePath, '.tx/config')),
-        fs.unlink(path.join(basePath, '.transifexrc'))
+        fs.unlink(path.join(basePath, '.transifexrc')),
     ]);
     await fs.rmdir(path.join(basePath, '.tx'));
     await fs.rmdir(basePath);

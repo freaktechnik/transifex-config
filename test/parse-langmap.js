@@ -6,7 +6,7 @@ test("parseLanguageMap from string only", (t) => {
     const expectedLanguageMap = {
         "en-US": "en",
         "sr_latin": "sr@latin",
-        "el-GR": "el"
+        "el-GR": "el",
     };
 
     const parsedMap = parseLanguageMap(languageMap);
@@ -18,14 +18,14 @@ test("parseLanguageMap inherit from object", (t) => {
     const existingMap = {
         "en-US": "en_US",
         "el-GR": "foo",
-        "fr-FR": "fr_FR"
+        "fr-FR": "fr_FR",
     };
     const languageMap = "en : en-US, sr@latin:sr_latin, el:el-GR";
     const expectedLanguageMap = {
         "en-US": "en",
         "sr_latin": "sr@latin",
         "el-GR": "el",
-        "fr-FR": "fr_FR"
+        "fr-FR": "fr_FR",
     };
 
     const parsedMap = parseLanguageMap(languageMap, existingMap);
@@ -35,7 +35,7 @@ test("parseLanguageMap inherit from object", (t) => {
 
 test("parseLanguageMap no string, only object", (t) => {
     const existingMap = {
-        "en-US": "en_US"
+        "en-US": "en_US",
     };
     const languageMap = "";
 

@@ -2,10 +2,10 @@ import test from 'ava';
 import path from 'node:path';
 import TransifexConfig from '../index.js';
 import {
-    mockEnvironment, deleteMockEnvironment
+    mockEnvironment, deleteMockEnvironment,
 } from './_mock-environment.js';
 import {
-    NoMatchingResourceError, MatchesSourceError
+    NoMatchingResourceError, MatchesSourceError,
 } from '../lib/errors.js';
 
 test("Constructor throws if the files don't exist", (t) => {
@@ -32,8 +32,8 @@ hostname = https://example.com`;
         "my site": {
             "username": "foo",
             "password": "bar",
-            "hostname": "https://example.com"
-        }
+            "hostname": "https://example.com",
+        },
     };
     const basePath = await mockEnvironment("", rc);
     const txc = new TransifexConfig(basePath);
@@ -53,7 +53,7 @@ test("Reading fails when there is no transifexrc", async (t) => {
     txc.getRC.cache.clear();
 
     return t.throwsAsync(txc.getRC(), {
-        instanceOf: Error
+        instanceOf: Error,
     });
 });
 
@@ -71,21 +71,21 @@ file_filter=<lang>.foo
 source_lang=de`;
     const expectedConfig = {
         "main": {
-            "host": "https://example.com"
+            "host": "https://example.com",
         },
         "test": {
             "my_project": {
                 "main_resource": {
                     "source_lang": "en",
                     "source_file": "foo.bar",
-                    "file_filter": "<lang>.bar"
+                    "file_filter": "<lang>.bar",
                 },
                 "second_res": {
                     "file_filter": "<lang>.foo",
-                    "source_lang": "de"
-                }
-            }
-        }
+                    "source_lang": "de",
+                },
+            },
+        },
     };
     const basePath = await mockEnvironment(config);
     const txc = new TransifexConfig(basePath);
@@ -128,15 +128,15 @@ source_lang=de`;
             "name": "main_resource",
             "source_lang": "en",
             "source_file": "foo.bar",
-            "file_filter": "<lang>.bar"
+            "file_filter": "<lang>.bar",
         },
         {
             "organization": "test",
             "project": "my_project",
             "name": "second_res",
             "file_filter": "<lang>.foo",
-            "source_lang": "de"
-        }
+            "source_lang": "de",
+        },
     ];
 
     const txc = new TransifexConfig(basePath);
@@ -156,7 +156,7 @@ host=https://example.com`);
         project: "main",
         name: "resource",
         "file_filter": "locales/<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     }), "en");
 
     await deleteMockEnvironment(basePath);
@@ -172,7 +172,7 @@ host=https://example.com`);
         name: "resource",
         "lang_map": "fr:fr-FR",
         "file_filter": "locales/<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     }), "en");
 
     await deleteMockEnvironment(basePath);
@@ -188,7 +188,7 @@ host=https://example.com`);
         name: "resource",
         "lang_map": "en_US:en-US",
         "file_filter": "locales/<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     }), "en_US");
 
     await deleteMockEnvironment(basePath);
@@ -205,7 +205,7 @@ lang_map=en_US:en-US`);
         name: "resource",
         "lang_map": "fr:fr-FR",
         "source_lang": "en",
-        "file_filter": "locales/<lang>.file"
+        "file_filter": "locales/<lang>.file",
     }), "en_US");
 
     await deleteMockEnvironment(basePath);
@@ -222,7 +222,7 @@ lang_map=en_US:en-US`);
         name: "resource",
         "lang_map": "en:en-US",
         "source_lang": "en",
-        "file_filter": "locales/<lang>.file"
+        "file_filter": "locales/<lang>.file",
     }), "en");
 
     await deleteMockEnvironment(basePath);
@@ -307,10 +307,10 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/en/en.properties"), false), {
-        instanceOf: MatchesSourceError
+        instanceOf: MatchesSourceError,
     });
     await t.throwsAsync(txc.getResource(path.join(basePath, "locales/source/main.properties")), {
-        instanceOf: MatchesSourceError
+        instanceOf: MatchesSourceError,
     });
 
     await deleteMockEnvironment(basePath);
@@ -329,7 +329,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/full/path/to/nothing.po"), {
-        instanceOf: NoMatchingResourceError
+        instanceOf: NoMatchingResourceError,
     });
 
     await deleteMockEnvironment(basePath);
@@ -348,7 +348,7 @@ source_lang=en`;
     const txc = new TransifexConfig(basePath);
 
     await t.throwsAsync(txc.getResource("/wrong/path/to/locales/en/main.properties"), {
-        instanceOf: NoMatchingResourceError
+        instanceOf: NoMatchingResourceError,
     });
 
     await deleteMockEnvironment(basePath);

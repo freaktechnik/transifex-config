@@ -1,6 +1,6 @@
 import test from 'ava';
 import {
-    NoMatchingResourceError, MatchesSourceError
+    NoMatchingResourceError, MatchesSourceError,
 } from '../lib/errors.js';
 
 test("Exports a constructor", (t) => {

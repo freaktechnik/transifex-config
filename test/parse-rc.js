@@ -15,13 +15,13 @@ neq=!= test`;
         "test": {
             "test_rc": "test value",
             "foo": "bar",
-            "indent": "test"
+            "indent": "test",
         },
         "second section": {
             "someKey": "ç*%T&3",
             "eq": "=",
-            "neq": "!= test"
-        }
+            "neq": "!= test",
+        },
     };
 
     t.deepEqual(parseRC(rc), parsedRC);

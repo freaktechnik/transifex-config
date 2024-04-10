@@ -1,9 +1,9 @@
 import test from 'ava';
 import {
-    txconfig, transifexrc, TXCONFIG, TRANSIFEXRC
+    txconfig, transifexrc, TXCONFIG, TRANSIFEXRC,
 } from '../lib/load-config.js';
 import {
-    mockEnvironment, deleteMockEnvironment
+    mockEnvironment, deleteMockEnvironment,
 } from './_mock-environment.js';
 
 test("File constants", (t) => {
@@ -20,8 +20,8 @@ hostname = https://example.com`;
         "my site": {
             "username": "foo",
             "password": "bar",
-            "hostname": "https://example.com"
-        }
+            "hostname": "https://example.com",
+        },
     };
     const basePath = await mockEnvironment("", rc);
 
@@ -55,8 +55,8 @@ hostname = https://example.com`;
         "my site": {
             "username": "foo",
             "password": "bar",
-            "hostname": "https://example.com"
-        }
+            "hostname": "https://example.com",
+        },
     };
     const basePath = await mockEnvironment("", rc);
 
@@ -76,8 +76,8 @@ hostname = https://example.com`;
         "https://sub.example.com": {
             "username": "foo",
             "password": "bar",
-            "hostname": "https://example.com"
-        }
+            "hostname": "https://example.com",
+        },
     };
     const basePath = await mockEnvironment("", rc);
 
@@ -102,21 +102,21 @@ file_filter=<lang>.foo
 source_lang=de`;
     const parsedConfig = {
         "main": {
-            "host": "https://example.com"
+            "host": "https://example.com",
         },
         "test": {
             "my_project": {
                 "main_resource": {
                     "source_lang": "en",
                     "source_file": "foo.bar",
-                    "file_filter": "<lang>.bar"
+                    "file_filter": "<lang>.bar",
                 },
                 "second_res": {
                     "file_filter": "<lang>.foo",
-                    "source_lang": "de"
-                }
-            }
-        }
+                    "source_lang": "de",
+                },
+            },
+        },
     };
     const basePath = await mockEnvironment(config);
 

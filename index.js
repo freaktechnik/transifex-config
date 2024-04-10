@@ -5,11 +5,11 @@
 import path from "node:path";
 import fs from "node:fs";
 import {
-    txconfig, transifexrc, TRANSIFEXRC, TXCONFIG
+    txconfig, transifexrc, TRANSIFEXRC, TXCONFIG,
 } from "./lib/load-config.js";
 import parseLangMap from "./lib/parse-langmap.js";
 import {
-    NoMatchingResourceError, MatchesSourceError
+    NoMatchingResourceError, MatchesSourceError,
 } from "./lib/errors.js";
 import matchResource from "./lib/match-resource.js";
 import memoize from "lodash.memoize";
@@ -92,21 +92,21 @@ class TransifexConfig {
         const resources = [];
         for(const [
             organization,
-            projects
+            projects,
         ] of Object.entries(config)) {
             if(organization != "main" && typeof projects === 'object') {
                 for(const [
                     project,
-                    configResources
+                    configResources,
                 ] of Object.entries(projects)) {
                     for(const [
                         name,
-                        resource
+                        resource,
                     ] of Object.entries(configResources)) {
                         resources.push(Object.assign({
                             organization,
                             project,
-                            name
+                            name,
                         }, resource));
                     }
                 }

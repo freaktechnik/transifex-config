@@ -5,7 +5,7 @@ test("Doesn't match unrelated file", (t) => {
     const basePath = "/foo/";
     const resource = {
         "file_filter": "<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
 
     t.false(matchResource(basePath, "/bar/en.file", resource));
@@ -16,7 +16,7 @@ test("Doesn't match path that includes the full path", (t) => {
     const basePath = "/foo/";
     const resource = {
         "file_filter": "<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
 
     t.false(matchResource(basePath, "/bar/foo/en.file", resource));
@@ -28,7 +28,7 @@ test("Get resource from file_filter", (t) => {
     const localPath = `${basePath}de/de.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
     const match = matchResource(basePath, localPath, resource);
 
@@ -40,7 +40,7 @@ test("File filter needs <lang> to be the same value everywhere", (t) => {
     const localPath = `${basePath}de/fr.file`;
     const resource = {
         "file_filter": "<lang>/<lang>.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
     const match = matchResource(basePath, localPath, resource);
 
@@ -53,7 +53,7 @@ test("Get resource from trans.lang", (t) => {
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "trans.fi": "custom/my.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
     const match = matchResource(basePath, localPath, resource);
 
@@ -66,7 +66,7 @@ test("Get resource from source_file", (t) => {
     const resource = {
         "file_filter": "<lang>/<lang>.file",
         "source_file": "source.file",
-        "source_lang": "en"
+        "source_lang": "en",
     };
     const match = matchResource(basePath, localPath, resource);
 
