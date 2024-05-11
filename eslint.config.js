@@ -8,7 +8,7 @@ export default [
         files: ["**/*.js"],
         rules: {
             "one-var": "off",
-            "require-jsdoc": "warn",
+            "jsdoc/require-jsdoc": "warn",
         },
     },
 ];

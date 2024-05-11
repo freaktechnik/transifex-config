@@ -56,10 +56,10 @@ class TransifexConfig {
         this.basePath = basePath;
 
         const R_OK = fs.R_OK || fs.constants.R_OK;
-        /* eslint-disable node/no-sync */
+        /* eslint-disable n/no-sync */
         fs.accessSync(path.join(this.basePath, TRANSIFEXRC), R_OK);
         fs.accessSync(path.join(this.basePath, TXCONFIG), R_OK);
-        /* eslint-enable node/no-sync */
+        /* eslint-enable n/no-sync */
     }
 
     /**
