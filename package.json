@@ -25,7 +25,7 @@
     "@freaktechnik/eslint-config-test": "^10.1.4",
     "ava": "^6.2.0",
     "c8": "^10.1.2",
-    "eslint": "^9.14.0",
+    "eslint": "^9.15.0",
     "jsdoc-to-markdown": "^9.0.5",
     "random-string": "^0.2.0"
   },
