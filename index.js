@@ -20,14 +20,14 @@ import defaultBasePath from "app-root-path";
  * Has a property for each key in the section, with trimmed name and value.
  */
 /**
- * @typedef {Record<string, module:transifex-config~ConfigSection>} ParsedConfig
+ * @typedef {Record<string, ConfigSection>} ParsedConfig
  * Has a property for each section in the config. Each section has a property
  * named after the key with its value assigned.
  */
 
 /**
  * @param {string} [service] - The config should contain this service URL.
- * @returns {module:transifex-config~ParsedConfig} Parsed .transifexrc as an
+ * @returns {ParsedConfig} Parsed .transifexrc as an
  *          object. Will be cached.
  * @async
  * @throws The .transifexrc could not be read.
@@ -37,10 +37,6 @@ function _getRC(service) {
     return transifexrc(this.basePath, service);
 }
 
-/**
- * @exports module:transifex-config
- * @class
- */
 class TransifexConfig {
     /**
      * @param {string} [basePath=require("app-root-path")] - Path the transifex configuration is in. Defaults
@@ -63,14 +59,14 @@ class TransifexConfig {
     }
 
     /**
-     * Memoized version of {@link module:transifex-config~_getRC}.
+     * Memoized version of {@link _getRC}.
      *
-     * @extends module:transifex-config~_getRC
+     * @extends _getRC
      */
     getRC = memoize(_getRC);
 
     /**
-     * @returns {module:transifex-config~ParsedConfig} Parsed .tx/config as an
+     * @returns {ParsedConfig} Parsed .tx/config as an
      *          object. Will be cached.
      * @async
      * @throws The config could not be read.
@@ -83,7 +79,7 @@ class TransifexConfig {
     }
 
     /**
-     * @returns {Array.<module:transifex-config~ConfigSection>} Array of resources.
+     * @returns {Array.<ConfigSection>} Array of resources.
      * @async
      * @throws The config could not be read.
      */
@@ -121,10 +117,10 @@ class TransifexConfig {
      * @param {boolean} [matchSourceLang] - If the resource should be returned
      *                                            when the path is for the source
      *                                            language of the resource.
-     * @returns {module:transifex-config~ConfigSection} Config section for the
+     * @returns {ConfigSection} Config section for the
      *          resource.
      * @async
-     * @throws {module:transifex-config/lib/errors.NoMatchingResourceError} There
+     * @throws {NoMatchingResourceError} There
      *         is no matching resource.
      * @throws The config could not be read.
      */
@@ -165,7 +161,7 @@ class TransifexConfig {
 
     /**
      * @param {string} lang - Language code to map from local to external.
-     * @param {module:transifex-config~ConfigSection} resource - Resource to get map
+     * @param {ConfigSection} resource - Resource to get map
      *                                                           the language for.
      * @returns {string} Mapped language code.
      * @async
