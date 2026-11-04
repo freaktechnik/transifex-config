@@ -6,6 +6,7 @@ on:
     paths:
     - index.js
     - lib/*.js
+    - .github/workflows/docs.yml
 jobs:
   generate:
     runs-on: ubuntu-latest
