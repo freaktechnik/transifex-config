@@ -90,21 +90,22 @@ class TransifexConfig {
             organization,
             projects,
         ] of Object.entries(config)) {
-            if(organization != "main" && typeof projects === 'object') {
+            if(organization === "main" || typeof projects !== 'object') {
+                continue;
+            }
+            for(const [
+                project,
+                configResources,
+            ] of Object.entries(projects)) {
                 for(const [
-                    project,
-                    configResources,
-                ] of Object.entries(projects)) {
-                    for(const [
+                    name,
+                    resource,
+                ] of Object.entries(configResources)) {
+                    resources.push(Object.assign({
+                        organization,
+                        project,
                         name,
-                        resource,
-                    ] of Object.entries(configResources)) {
-                        resources.push(Object.assign({
-                            organization,
-                            project,
-                            name,
-                        }, resource));
-                    }
+                    }, resource));
                 }
             }
         }
@@ -138,7 +139,7 @@ class TransifexConfig {
         if(!resource) {
             throw new NoMatchingResourceError(localPath);
         }
-        else if(!matchSourceLang && resource.source_lang == lang) {
+        if(!matchSourceLang && resource.source_lang == lang) {
             throw new MatchesSourceError(localPath);
         }
         resource.lang = lang;
